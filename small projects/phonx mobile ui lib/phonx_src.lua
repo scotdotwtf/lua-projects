@@ -56,6 +56,8 @@ function lib:start(tname_lib)
 	Scroll.BorderSizePixel = 0
 	Scroll.Position = UDim2.new(0, 0, 0.217696354, 0)
 	Scroll.Size = UDim2.new(0, 135, 0, 126)
+	Scroll.ScrollBarImageColor3 = Color3.new(0, 0, 0)
+	Scroll.ScrollBarImageTransparency = 0.75
 	Scroll.BottomImage = "rbxassetid://6689849479"
 	Scroll.MidImage = "rbxassetid://6689849479"
 	Scroll.TopImage = "rbxassetid://6689849479"
@@ -98,7 +100,7 @@ function lib:start(tname_lib)
 	Hide.Position = UDim2.new(0.680127919, 0, 0.234999999, 0)
 	Hide.Size = UDim2.new(0, 13, 0, 15)
 	Hide.Image = "rbxassetid://7072719338"
-	
+
 	--// scrib
 	Close.MouseButton1Click:Connect(function()
 		Container.Parent.Visible = false
@@ -114,7 +116,7 @@ function lib:start(tname_lib)
 		--// make
 		local ScriptButton = Instance.new("TextButton")
 		local KeepTextSizeButton = Instance.new("UIAspectRatioConstraint")
-	
+
 		--// define
 		ScriptButton.Name = "ScriptButton"
 		ScriptButton.Parent = Scroll
@@ -137,7 +139,7 @@ function lib:start(tname_lib)
 			pcall(callback)
 		end)
 	end
-	
+
 	return lib
 end
 
