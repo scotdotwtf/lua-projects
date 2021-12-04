@@ -16,7 +16,7 @@ function lib:start(tname_lib)
 
 	--// define
 	phonxlib.Name = "phonxlib"
-	phonxlib.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	phonxlib.Parent = game.CoreGui
 
 	WindowHolder.Name = "WindowHolder"
 	WindowHolder.Parent = phonxlib
