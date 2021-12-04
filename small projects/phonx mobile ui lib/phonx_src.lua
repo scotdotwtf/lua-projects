@@ -34,7 +34,7 @@ function lib:start(tname_lib)
 
 	HubName.Name = "HubName"
 	HubName.Parent = WindowHolder
-	HubName.BackgroundColor3 = Color3.fromRGB(73, 152, 255)
+	HubName.BackgroundColor3 = _G.TopBackgroundColor
 	HubName.BorderSizePixel = 0
 	HubName.Position = UDim2.new(0.683393896, 0, -0.00180894695, 0)
 	HubName.Size = UDim2.new(0, 136, 0, 34)
@@ -42,7 +42,7 @@ function lib:start(tname_lib)
 
 	Container.Name = "Container"
 	Container.Parent = HubName
-	Container.BackgroundColor3 = Color3.fromRGB(37, 121, 223)
+	Container.BackgroundColor3 = _G.MainBackgroundColor
 	Container.BorderSizePixel = 0
 	Container.Position = UDim2.new(0, 0, 4.25747473e-08, 0)
 	Container.Size = UDim2.new(0, 136, 0, 161)
@@ -75,7 +75,7 @@ function lib:start(tname_lib)
 	Name.Size = UDim2.new(0, 79, 0, 30)
 	Name.Font = Enum.Font.RobotoMono
 	Name.Text = tname_lib
-	Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Name.TextColor3 = _G.AllTextColor
 	Name.TextSize = 17.000
 	Name.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -126,7 +126,7 @@ function lib:start(tname_lib)
 		ScriptButton.Size = UDim2.new(0, 121, 0, 23)
 		ScriptButton.Font = Enum.Font.RobotoMono
 		ScriptButton.Text = tname_button
-		ScriptButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		ScriptButton.TextColor3 = _G.AllTextColor
 		ScriptButton.TextSize = 15.000
 
 		KeepTextSizeButton.Name = "KeepTextSizeButton"
