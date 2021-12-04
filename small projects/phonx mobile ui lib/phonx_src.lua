@@ -139,6 +139,4 @@ function lib:start(tname_lib)
 	end
 	
 	return lib
-end	
-
-return lib
+end
