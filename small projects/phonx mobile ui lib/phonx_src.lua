@@ -110,7 +110,10 @@ if not game.CoreGui:FindFirstChild("phonxlib") then
 	end)
 
 	Hide.MouseButton1Click:Connect(function()
+	    if Container.Visible == true then
 		Container.Visible = false
+	    else
+		Container.Visible = true
 	end)
 
 	--// button stuff
