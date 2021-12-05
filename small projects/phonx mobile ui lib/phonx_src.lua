@@ -114,6 +114,7 @@ if not game.CoreGui:FindFirstChild("phonxlib") then
 		Container.Visible = false
 	    else
 		Container.Visible = true
+		end
 	end)
 
 	--// button stuff
@@ -240,6 +241,7 @@ else
 		Container.Visible = false
 	    else
 		Container.Visible = true
+		end
 	end)
 
 	--// button stuff
