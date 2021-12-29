@@ -10,6 +10,7 @@ tbar.LeftFrame.MenuIcon.Background.Icon.Image = "http://www.roblox.com/asset/?id
 tbar.LeftFrame.ChatIcon.Background.Image = ""
 tbar.LeftFrame.Position = UDim2.new(0, 0, 0, 0)
 tbar.LeftFrame.Layout.Padding = UDim.new(0, 2)
+tbar.RightFrame.Layout.Padding = UDim.new(0, 2)
 
 tbar.RightFrame.Position = UDim2.new(1, 0, 0, 0)
 tbar.RightFrame.MoreMenu.OpenButton.Image = ""
