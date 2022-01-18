@@ -55,7 +55,7 @@ end)
 tbar.LeftFrame.MenuIcon.Background.MouseButton1Click:Connect(function()
 	if not game.GuiService.MenuOpened == false then
 	    game.GuiService.MenuOpened:Wait()
-	end)
+	end
 	changechatico()
 end)
 
