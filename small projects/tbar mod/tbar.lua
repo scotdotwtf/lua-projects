@@ -4,6 +4,7 @@ end
 
 local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
 local chatico = tbar.LeftFrame.ChatIcon.Background.Icon
+local UIS = game:GetService("UserInputService")
 
 tbar.Transparency = 0.5
 tbar.BorderSizePixel = 0
@@ -38,24 +39,26 @@ elseif chatico.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
     chatico.Image = "rbxasset://textures/ui/Chat/ChatDown@2x.png"
 end
 
-tbar.LeftFrame.ChatIcon.Background.MouseButton1Click:Connect(function()
+local function changechatico()
     wait()
     if chatico.Image == "rbxasset://textures/ui/TopBar/chatOff.png" then
         chatico.Image = "rbxasset://textures/ui/Chat/Chat@2x.png"
     elseif chatico.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
         chatico.Image = "rbxasset://textures/ui/Chat/ChatDown@2x.png"
-    end
+    end		
+end
+
+tbar.LeftFrame.ChatIcon.Background.MouseButton1Click:Connect(function()
+	changechatico()
 end)
 
-local UIS = game:GetService("UserInputService")
+tbar.LeftFrame.MenuIcon.Background.MouseButton1Click:Connect(function()
+	if not game.GuiService.MenuOpened == false then
+	    game.GuiService.MenuOpened:Wait()
+	end)
+	changechatico()
+end)
 
 UIS.InputBegan:Connect(function(input, gameProcessedEvent)
-    	if input.KeyCode == Enum.KeyCode.Slash then
-    		    wait()
-        if chatico.Image == "rbxasset://textures/ui/TopBar/chatOff.png" then
-            chatico.Image = "rbxasset://textures/ui/Chat/Chat@2x.png"
-        elseif chatico.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
-            chatico.Image = "rbxasset://textures/ui/Chat/ChatDown@2x.png"
-        end
-	end
+    changechatico()
 end)
