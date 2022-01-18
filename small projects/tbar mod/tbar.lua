@@ -1,6 +1,6 @@
 local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
 
-tbar.Transparency = 0.5
+tbar.Transparency = 1
 tbar.Size = UDim2.new(1, 0, 0, 30)
 tbar.BorderSizePixel = 0
 tbar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
