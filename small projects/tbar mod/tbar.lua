@@ -1,48 +1,61 @@
-local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
 
-tbar.Transparency = 1
+local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
+local chatico = tbar.LeftFrame.ChatIcon.Background.Icon
+
+tbar.Transparency = 0.5
 tbar.BorderSizePixel = 0
-tbar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+tbar.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
 
 tbar.LeftFrame.MenuIcon.Background.Image = ""
-tbar.LeftFrame.MenuIcon.Background.Icon.Image = "http://www.roblox.com/asset/?id=8390562623"
 tbar.LeftFrame.ChatIcon.Background.Image = ""
-tbar.LeftFrame.Position = UDim2.new(0, 2, 0, -2)
-
-tbar.RightFrame.Position = UDim2.new(1, 0, 0, 0)
 tbar.RightFrame.MoreMenu.OpenButton.Image = ""
 
-tbar.LeftFrame.MenuIcon.Background.StateOverlay.Image = "http://www.roblox.com/asset/?id=6689849479"
-tbar.LeftFrame.ChatIcon.Background.StateOverlay.Image = "http://www.roblox.com/asset/?id=6689849479"
-tbar.RightFrame.MoreMenu.OpenButton.StateOverlay.Image = "http://www.roblox.com/asset/?id=6689849479"
+tbar.LeftFrame.Position = UDim2.new(0, 0, 0, 2)
+tbar.LeftFrame.Size = UDim2.new(0, 0, 0, 36)
 
-local fps_counter = Instance.new("TextLabel")
+tbar.LeftFrame.MenuIcon.Position = UDim2.new(0, 0, 0, 0)
+tbar.LeftFrame.MenuIcon.Size = UDim2.new(0, 50, 0, 36)
+tbar.LeftFrame.MenuIcon.Background.Icon.Position = UDim2.new(0, 25, 0, 12)
+tbar.LeftFrame.MenuIcon.Background.Icon.Size = UDim2.new(0, 32, 0, 25)
 
-fps_counter.Name = "fps_counter"
-fps_counter.Parent = tbar.RightFrame
-fps_counter.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-fps_counter.BackgroundTransparency = 1
-fps_counter.BorderSizePixel = 0
-fps_counter.Position = UDim2.new(0, 104, 0, -32)
-fps_counter.Size = UDim2.new(0, 75, 0, 32)
-fps_counter.Font = Enum.Font.Gotham
-fps_counter.Text = "FPS | 60"
-fps_counter.TextColor3 = Color3.fromRGB(255, 255, 255)
-fps_counter.TextSize = 14.000
+tbar.LeftFrame.ChatIcon.Position = UDim2.new(0, 0, 0, 0)
+tbar.LeftFrame.ChatIcon.Size = UDim2.new(0, 50, 0, 36)
+tbar.LeftFrame.ChatIcon.Background.Icon.Position = UDim2.new(0, 14, 0, 13)
+tbar.LeftFrame.ChatIcon.Background.Icon.Size = UDim2.new(0, 28, 0, 27)
 
--- // ~ script from a free model lmao ~ //
-local FPS = 0
 
-local Tiempo = tick()
+tbar.LeftFrame.MenuIcon.Background.Icon.Image = "rbxasset://textures/ui/Menu/Hamburger.png"
+tbar.LeftFrame.ChatIcon.Background.StateOverlay.Image = ""
+tbar.RightFrame.MoreMenu.OpenButton.StateOverlay.Image = ""
+tbar.LeftFrame.MenuIcon.Background.StateOverlay.Image = ""
 
-spawn(function()
-	while game:GetService("RunService").RenderStepped:wait() do
-		local Transcurrido = math.abs(Tiempo-tick())
-		Tiempo = tick()
-		FPS = math.floor(1/Transcurrido)
-	end
+if chatico.Image == "rbxasset://textures/ui/TopBar/chatOff.png" then
+    chatico.Image = "rbxasset://textures/ui/Chat/Chat@2x.png"
+elseif chatico.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
+    chatico.Image = "rbxasset://textures/ui/Chat/ChatDown@2x.png"
+end
+
+tbar.LeftFrame.ChatIcon.Background.MouseButton1Click:Connect(function()
+    wait()
+    if chatico.Image == "rbxasset://textures/ui/TopBar/chatOff.png" then
+        chatico.Image = "rbxasset://textures/ui/Chat/Chat@2x.png"
+    elseif chatico.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
+        chatico.Image = "rbxasset://textures/ui/Chat/ChatDown@2x.png"
+    end
 end)
 
-while wait(0.1) do
-	fps_counter.Text = "FPS | "..tostring(FPS) 
-end
+local UIS = game:GetService("UserInputService")
+
+UIS.InputBegan:Connect(function(input, gameProcessedEvent)
+    	if input.KeyCode == Enum.KeyCode.Slash then
+    		    wait()
+        if chatico.Image == "rbxasset://textures/ui/TopBar/chatOff.png" then
+            chatico.Image = "rbxasset://textures/ui/Chat/Chat@2x.png"
+        elseif chatico.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
+            chatico.Image = "rbxasset://textures/ui/Chat/ChatDown@2x.png"
+        end
+	end
+end)
