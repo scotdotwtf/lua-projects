@@ -168,12 +168,6 @@ end)
 game.RunService.Heartbeat:Connect(function()
     tbar.LeftFrame.MenuIcon.Background.StateOverlay.Image = ""
     tbar.RightFrame.MoreMenu.OpenButton.Icon.Image = ""
-    if tbar.LeftFrame.ChatIcon.BadgeContainer then
-        tbar.LeftFrame.ChatIcon.BadgeContainer.Badge.Inner.ImageRectOffset = Vector2.new(0, 0)
-        tbar.LeftFrame.ChatIcon.BadgeContainer.Badge.Inner.ImageRectSize = Vector2.new(0, 0)
-        tbar.LeftFrame.ChatIcon.BadgeContainer.Badge.Inner.TextLabel:Destroy()
-        tbar.LeftFrame.ChatIcon.BadgeContainer.Badge.Background:Destroy()
-    end
     game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.Image = "rbxasset://textures/ui/Menu/HamburgerDown.png"
     game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.ImageRectOffset = Vector2.new(0, 0)
     game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.ImageRectSize = Vector2.new(0, 0)
