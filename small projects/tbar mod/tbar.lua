@@ -1,12 +1,7 @@
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
-
 wait(1)
-print("ty so fucking much colastee/simradius for making the playerlist and fixing this up a bit u is such a help (creds to colastee)")
-
---// Playlist start //--
-
 local a, b = pcall(function()
 local playerlist = Instance.new("ScreenGui")
 local PlayerListContainer = Instance.new("Frame")
@@ -22,8 +17,7 @@ local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
 
 playerlist.Name = "playerlist"
-playerlist.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-playerlist.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+playerlist.Parent = game:GetService("CoreGui")
 
 PlayerListContainer.Name = "PlayerListContainer"
 PlayerListContainer.Parent = playerlist
@@ -92,31 +86,32 @@ PlayerName.TextStrokeColor3 = Color3.fromRGB(34, 34, 34)
 PlayerName.TextStrokeTransparency = 0.750
 PlayerName.TextXAlignment = Enum.TextXAlignment.Left
 
-for _,v in pairs(game.Players:GetChildren()) do
-	local ex = scriptt.You:Clone()
-	ex.Name = v.Name
-	ex.Parent = scriptt.Parent.ScrollList
-	ex.BGFrame.PlayerName.Text = v.Name
-	game.Players.PlayerRemoving:Connect(function(p)
-		if p.Name == ex.BGFrame.PlayerName.Text then
-			local target = scriptt.Parent.ScrollList:FindFirstChild(p.Name)
-			target:Destroy()
-		end
-	end)
-end
-	game.Players.PlayerAdded:Connect(function(p)
-		local exe = scriptt.You:Clone()
-		exe.Name = p.Name
-		exe.Parent = scriptt.Parent.ScrollList
-		exe.BGFrame.PlayerName.Text = p.Name
-	end)
-end
+-- Scripts:
 
+local function VIBXX_fake_script() -- PlayerListContainer.LocalScript 
+
+	for _,v in pairs(game.Players:GetChildren()) do
+		local ex = scriptt.You:Clone()
+		ex.Name = v.Name
+		ex.Parent = scriptt.Parent.ScrollList
+		ex.BGFrame.PlayerName.Text = v.Name
+		game.Players.PlayerRemoving:Connect(function(p)
+			if p.Name == ex.BGFrame.PlayerName.Text then
+				local target = scriptt.Parent.ScrollList:FindFirstChild(p.Name)
+				target:Destroy()
+			end
+		end)
+	end
+		game.Players.PlayerAdded:Connect(function(p)
+			local exe = scriptt.You:Clone()
+			exe.Name = p.Name
+			exe.Parent = scriptt.Parent.ScrollList
+			exe.BGFrame.PlayerName.Text = p.Name
+		end)
+end
+coroutine.wrap(VIBXX_fake_script)()
 end)
-
 print(b)
-
---// Playlist end and topbar start //--
 
 local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
 local chatico = tbar.LeftFrame.ChatIcon.Background.Icon
@@ -174,7 +169,6 @@ game.RunService.Heartbeat:Connect(function()
     tbar.LeftFrame.MenuIcon.Background.StateOverlay.Image = ""
     tbar.RightFrame.MoreMenu.OpenButton.Icon.Image = ""
     if tbar.LeftFrame.ChatIcon.BadgeContainer then
-        tbar.LeftFrame.ChatIcon.BadgeContainer.Badge.Inner.Image = "rbxasset://textures/ui/Chat/MessageCounter.png"
         tbar.LeftFrame.ChatIcon.BadgeContainer.Badge.Inner.ImageRectOffset = Vector2.new(0, 0)
         tbar.LeftFrame.ChatIcon.BadgeContainer.Badge.Inner.ImageRectSize = Vector2.new(0, 0)
         tbar.LeftFrame.ChatIcon.BadgeContainer.Badge.Inner.TextLabel:Destroy()
@@ -188,4 +182,4 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
     changechatico()
 end)
 
---// Topbar End //--
+print("lol")
