@@ -21,6 +21,8 @@ tbar.LeftFrame.MenuIcon.Position = UDim2.new(0, 0, 0, 0)
 tbar.LeftFrame.MenuIcon.Size = UDim2.new(0, 50, 0, 36)
 tbar.LeftFrame.MenuIcon.Background.Icon.Position = UDim2.new(0, 25, 0, 12)
 tbar.LeftFrame.MenuIcon.Background.Icon.Size = UDim2.new(0, 32, 0, 25)
+game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.Position = UDim2.new(0, -8, 0, 18)
+game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.Size = UDim2.new(0, 32, 0, 25)
 
 tbar.LeftFrame.ChatIcon.Position = UDim2.new(0, 0, 0, 0)
 tbar.LeftFrame.ChatIcon.Size = UDim2.new(0, 50, 0, 36)
@@ -40,25 +42,23 @@ elseif chatico.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
 end
 
 local function changechatico()
-    wait()
     if chatico.Image == "rbxasset://textures/ui/TopBar/chatOff.png" then
         chatico.Image = "rbxasset://textures/ui/Chat/Chat@2x.png"
     elseif chatico.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
         chatico.Image = "rbxasset://textures/ui/Chat/ChatDown@2x.png"
-    end		
+    end        
 end
-
-tbar.LeftFrame.ChatIcon.Background.MouseButton1Click:Connect(function()
-	changechatico()
+game.RunService.Heartbeat:Connect(function()
+changechatico()
 end)
 
 tbar.LeftFrame.MenuIcon.Background.MouseButton1Click:Connect(function()
-	if not game.GuiService.MenuOpened == false then
-	    game.GuiService.MenuOpened:Wait()
-	end
-	changechatico()
 end)
-
+game.RunService.Heartbeat:Connect(function()
+    game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.Image = "rbxasset://textures/ui/Menu/HamburgerDown.png"
+    game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.ImageRectOffset = Vector2.new(0, 0)
+    game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.ImageRectSize = Vector2.new(0, 0)
+end)
 UIS.InputBegan:Connect(function(input, gameProcessedEvent)
     changechatico()
 end)
