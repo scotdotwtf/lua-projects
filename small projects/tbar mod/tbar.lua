@@ -12,8 +12,9 @@ local You = Instance.new("Frame")
 local BGFrame = Instance.new("TextButton")
 local MembershipIcon = Instance.new("ImageLabel")
 local PlayerName = Instance.new("TextLabel")
-local scriptt = Instance.new('LocalScript', PlayerListContainer)
 local StarterGui = game:GetService("StarterGui")
+
+playerlist.ResetOnSpawn = false
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
 
 playerlist.Name = "playerlist"
@@ -25,6 +26,10 @@ PlayerListContainer.BackgroundTransparency = 1.000
 PlayerListContainer.Position = UDim2.new(1, -170, 0, 2)
 PlayerListContainer.Size = UDim2.new(0, 170, 0.5, 0)
 
+local hideme = Instance.new("LocalScript")
+hideme.Parent = PlayerListContainer
+hideme.Name = "hideme"
+
 ScrollList.Name = "ScrollList"
 ScrollList.Parent = PlayerListContainer
 ScrollList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -33,7 +38,7 @@ ScrollList.BorderSizePixel = 0
 ScrollList.Selectable = false
 ScrollList.Size = UDim2.new(0, 170, 1, 0)
 ScrollList.BottomImage = "rbxasset://textures/ui/scroll-bottom.png"
-ScrollList.CanvasSize = UDim2.new(0, 0, 0, 100)
+ScrollList.CanvasSize = UDim2.new(0, 0, 0, 500)
 ScrollList.MidImage = "rbxasset://textures/ui/scroll-middle.png"
 ScrollList.ScrollBarThickness = 6
 ScrollList.TopImage = "rbxasset://textures/ui/scroll-top.png"
@@ -52,7 +57,7 @@ PopupClipFrame.Size = UDim2.new(0, 150, 1.5, 0)
 PopupClipFrame.Visible = false
 
 You.Name = "You"
-You.Parent = scriptt
+You.Parent = hideme
 You.BackgroundTransparency = 1.000
 You.Size = UDim2.new(1, 0, 0, 24)
 
@@ -86,33 +91,49 @@ PlayerName.TextStrokeColor3 = Color3.fromRGB(34, 34, 34)
 PlayerName.TextStrokeTransparency = 0.750
 PlayerName.TextXAlignment = Enum.TextXAlignment.Left
 
--- Scripts:
-
-local function VIBXX_fake_script() -- PlayerListContainer.LocalScript 
+local function VIBXX_fake_script()
 
 	for _,v in pairs(game.Players:GetChildren()) do
-		local ex = scriptt.You:Clone()
+		local ex = You:Clone()
 		ex.Name = v.Name
-		ex.Parent = scriptt.Parent.ScrollList
+		ex.Parent = ScrollList
 		ex.BGFrame.PlayerName.Text = v.Name
 		game.Players.PlayerRemoving:Connect(function(p)
 			if p.Name == ex.BGFrame.PlayerName.Text then
-				local target = scriptt.Parent.ScrollList:FindFirstChild(p.Name)
+			    wait(0.10)
+				local target = ScrollList:FindFirstChild(p.Name)
 				target:Destroy()
+				wait(0.10)
 			end
 		end)
 	end
 		game.Players.PlayerAdded:Connect(function(p)
-			local exe = scriptt.You:Clone()
-			exe.Name = p.Name
-			exe.Parent = scriptt.Parent.ScrollList
-			exe.BGFrame.PlayerName.Text = p.Name
+		    wait(0.10)
+		    for _,v in pairs(ScrollList:GetChildren()) do
+                if v:IsA("Frame") then
+                    v:Destroy()
+                end
+		    end
+	for _,v in pairs(game.Players:GetChildren()) do
+		local ex = You:Clone()
+		ex.Name = v.Name
+		ex.Parent = ScrollList
+		ex.BGFrame.PlayerName.Text = v.Name
+		game.Players.PlayerRemoving:Connect(function(p)
+			if p.Name == ex.BGFrame.PlayerName.Text then
+			    wait(0.10)
+				local target = ScrollList:FindFirstChild(p.Name)
+				target:Destroy()
+				wait(0.10)
+			end
+		end)
+	end
+			wait(0.10)
 		end)
 end
 coroutine.wrap(VIBXX_fake_script)()
 end)
 print(b)
-
 local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
 local chatico = tbar.LeftFrame.ChatIcon.Background.Icon
 local UIS = game:GetService("UserInputService")
@@ -168,6 +189,14 @@ end)
 game.RunService.Heartbeat:Connect(function()
     tbar.LeftFrame.MenuIcon.Background.StateOverlay.Image = ""
     tbar.RightFrame.MoreMenu.OpenButton.Icon.Image = ""
+    if tbar.LeftFrame.ChatIcon.BadgeContainer then
+        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner.Image = "rbxasset://textures/ui/Chat/MessageCounter.png"
+        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner.ImageRectOffset = Vector2.new(0, 0)
+        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner.ImageRectSize = Vector2.new(0, 0)
+        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner:ClearAllChildren()
+        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner.ScaleType = Enum.ScaleType.Fit
+        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Background.Image = ""
+    end
     game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.Image = "rbxasset://textures/ui/Menu/HamburgerDown.png"
     game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.ImageRectOffset = Vector2.new(0, 0)
     game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.ImageRectSize = Vector2.new(0, 0)
@@ -176,4 +205,3 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
     changechatico()
 end)
 
-print("lol")
