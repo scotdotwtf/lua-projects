@@ -2,6 +2,8 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 wait(1)
+local runserv = game.RunService
+local heartbeat = runserv.Heartbeat
 function oldcon()
 local Instance_new = Instance.new
 local UDim2_new = UDim2.new
@@ -210,7 +212,6 @@ local function checkFFlag(flagName)
 end
 
 
--- Eye candy uses RenderStepped
 local EYECANDY_ENABLED = true
 
 local AUTO_TAB_WIDTH = -1
@@ -2366,6 +2367,84 @@ local MembershipIcon = Instance.new("ImageLabel")
 local PlayerName = Instance.new("TextLabel")
 local scriptt = Instance.new('LocalScript', PlayerListContainer)
 local StarterGui = game:GetService("StarterGui")
+local NameHealthContainer = Instance.new("ImageButton")
+local Username = Instance.new("TextLabel")
+local HealthContainer = Instance.new("Frame")
+local HealthFill = Instance.new("Frame")
+
+NameHealthContainer.Name = "NameHealthContainer"
+NameHealthContainer.Parent = game.CoreGui.ThemeProvider.TopBarFrame.RightFrame
+NameHealthContainer.BackgroundTransparency = 1.000
+NameHealthContainer.Position = UDim2.new(1, -170, 0.027778089, 0)
+NameHealthContainer.Size = UDim2.new(0, 170, 1, 0)
+NameHealthContainer.AutoButtonColor = false
+
+Username.Name = "Username"
+Username.Parent = NameHealthContainer
+Username.BackgroundTransparency = 1.000
+Username.Position = UDim2.new(0, 7, 0, 0)
+Username.Size = UDim2.new(1, -14, 0, 22)
+Username.Font = Enum.Font.SourceSansBold
+Username.Text = "Player1"
+Username.TextColor3 = Color3.fromRGB(255, 255, 255)
+Username.TextSize = 14.000
+Username.TextXAlignment = Enum.TextXAlignment.Left
+Username.TextYAlignment = Enum.TextYAlignment.Bottom
+
+HealthContainer.Name = "HealthContainer"
+HealthContainer.Parent = NameHealthContainer
+HealthContainer.BackgroundColor3 = Color3.fromRGB(228, 236, 246)
+HealthContainer.BorderSizePixel = 0
+HealthContainer.Position = UDim2.new(0, 7, 1, -9)
+HealthContainer.Size = UDim2.new(1, -14, 0, 3)
+
+HealthFill.Name = "HealthFill"
+HealthFill.Parent = HealthContainer
+HealthFill.BackgroundColor3 = Color3.fromRGB(27, 252, 107)
+HealthFill.BorderSizePixel = 0
+HealthFill.Size = UDim2.new(1, 0, 1, 0)
+
+
+local function JWFFKU_fake_script() 
+	local script = Instance.new('LocalScript', Username)
+
+	local player = game.Players.LocalPlayer
+	while wait() do
+		script.Parent.Text = player.Name
+	end
+end
+coroutine.wrap(JWFFKU_fake_script)()
+local function VWPK_fake_script()
+	local script = Instance.new('LocalScript', NameHealthContainer)
+
+	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Health,false)
+	local player = game.Players.LocalPlayer
+	local char = player.Character
+	heartbeat:Connect(function()
+	char = player.Character
+	end)
+	local gui = script.Parent
+	local frame = gui.HealthContainer
+	local bar = frame.HealthFill
+	heartbeat:Connect(function()
+		bar.Size = UDim2.new(0,(char:WaitForChild("Humanoid").Health / char:WaitForChild("Humanoid").MaxHealth * 160),1,0)
+		spawn(function() 
+			if char.Humanoid.Health < char.Humanoid.MaxHealth and char.Humanoid.Health > char.Humanoid.MaxHealth/2 then
+				bar.BackgroundColor3 = Color3.new(1-(char.Humanoid.Health/char.Humanoid.MaxHealth)+0.5,1,0)
+			else
+				bar.BackgroundColor3 = Color3.fromRGB(27, 252, 107)
+			end
+			if char.Humanoid.Health == char.Humanoid.MaxHealth/2 then
+				bar.BackgroundColor3 = Color3.new(1,1,0)
+			end
+			if char.Humanoid.Health < char.Humanoid.MaxHealth/2 then
+				bar.BackgroundColor3 = Color3.new(1,(char.Humanoid.Health/char.Humanoid.MaxHealth)*2,0)
+			end 
+		end)
+	end)
+end
+coroutine.wrap(VWPK_fake_script)()
+
 
 playerlist.ResetOnSpawn = false
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
@@ -2382,6 +2461,7 @@ PlayerListContainer.Size = UDim2.new(0, 170, 0.5, 0)
 
 ScrollList.Name = "ScrollList"
 ScrollList.Parent = PlayerListContainer
+ScrollList.AutomaticCanvasSize = Enum.AutomaticSize.Y
 ScrollList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ScrollList.BackgroundTransparency = 1.000
 ScrollList.BorderSizePixel = 0
@@ -2392,7 +2472,6 @@ ScrollList.CanvasSize = UDim2.new(0, 0, 0, 500)
 ScrollList.MidImage = "rbxasset://textures/ui/scroll-middle.png"
 ScrollList.ScrollBarThickness = 0
 ScrollList.TopImage = "rbxasset://textures/ui/scroll-top.png"
-ScrollList.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
 UIListLayout.Parent = ScrollList
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -2498,7 +2577,9 @@ local function VIBXX_fake_script() -- PlayerListContainer.LocalScript
 end
 coroutine.wrap(VIBXX_fake_script)()
 end)
+
 print(b)
+
 local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
 local chatico = tbar.LeftFrame.ChatIcon.Background.Icon
 local UIS = game:GetService("UserInputService")
@@ -2585,4 +2666,5 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
 	end
 end)
 
-print("worked")
+
+
