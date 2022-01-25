@@ -2390,7 +2390,7 @@ ScrollList.Size = UDim2.new(0, 170, 1, 0)
 ScrollList.BottomImage = "rbxasset://textures/ui/scroll-bottom.png"
 ScrollList.CanvasSize = UDim2.new(0, 0, 0, 500)
 ScrollList.MidImage = "rbxasset://textures/ui/scroll-middle.png"
-ScrollList.ScrollBarThickness = 6
+ScrollList.ScrollBarThickness = 0
 ScrollList.TopImage = "rbxasset://textures/ui/scroll-top.png"
 ScrollList.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
@@ -2584,3 +2584,5 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
         end
 	end
 end)
+
+print("worked")
