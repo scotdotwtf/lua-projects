@@ -2366,11 +2366,12 @@ local MembershipIcon = Instance.new("ImageLabel")
 local PlayerName = Instance.new("TextLabel")
 local scriptt = Instance.new('LocalScript', PlayerListContainer)
 local StarterGui = game:GetService("StarterGui")
+
 playerlist.ResetOnSpawn = false
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
 
 playerlist.Name = "playerlist"
-playerlist.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+playerlist.Parent = game:GetService("CoreGui")
 playerlist.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 PlayerListContainer.Name = "PlayerListContainer"
@@ -2391,6 +2392,7 @@ ScrollList.CanvasSize = UDim2.new(0, 0, 0, 500)
 ScrollList.MidImage = "rbxasset://textures/ui/scroll-middle.png"
 ScrollList.ScrollBarThickness = 6
 ScrollList.TopImage = "rbxasset://textures/ui/scroll-top.png"
+ScrollList.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
 UIListLayout.Parent = ScrollList
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -2443,40 +2445,52 @@ PlayerName.TextXAlignment = Enum.TextXAlignment.Left
 -- Scripts:
 
 local function VIBXX_fake_script() -- PlayerListContainer.LocalScript 
-
 	for _,v in pairs(game.Players:GetChildren()) do
 		local ex = scriptt.You:Clone()
 		ex.Name = v.Name
 		ex.Parent = scriptt.Parent.ScrollList
 		ex.BGFrame.PlayerName.Text = v.Name
+		spawn(function()
+	       if  v:IsFriendsWith(game.Players.LocalPlayer.UserId) then
+		        scriptt.Parent.ScrollList:FindFirstChild(v.Name).BGFrame.MembershipIcon.Image = "rbxasset://textures/ui/icon_friends_16.png"
+	        end
+		end)
 		game.Players.PlayerRemoving:Connect(function(p)
 			if p.Name == ex.BGFrame.PlayerName.Text then
 			    wait(0.10)
 				local target = scriptt.Parent.ScrollList:FindFirstChild(p.Name)
 				target:Destroy()
+				table.remove(idcodes, p.UserId)
 				wait(0.10)
 			end
 		end)
 	end
 		game.Players.PlayerAdded:Connect(function(p)
-		    wait(0.10)
 		    for _,v in pairs(scriptt.Parent.ScrollList:GetChildren()) do
                 if v:IsA("Frame") then
                     v:Destroy()
                 end
 		    end
 	for _,v in pairs(game.Players:GetChildren()) do
+	    spawn(function()
 		local ex = scriptt.You:Clone()
 		ex.Name = v.Name
 		ex.Parent = scriptt.Parent.ScrollList
 		ex.BGFrame.PlayerName.Text = v.Name
+		spawn(function()
+	       if  v:IsFriendsWith(game.Players.LocalPlayer.UserId) then
+		        scriptt.Parent.ScrollList:FindFirstChild(v.Name).BGFrame.MembershipIcon.Image = "rbxasset://textures/ui/icon_friends_16.png"
+	        end
+		end)
 		game.Players.PlayerRemoving:Connect(function(p)
 			if p.Name == ex.BGFrame.PlayerName.Text then
 			    wait(0.10)
 				local target = scriptt.Parent.ScrollList:FindFirstChild(p.Name)
 				target:Destroy()
+				table.remove(idcodes, p.UserId)
 				wait(0.10)
 			end
+		end)
 		end)
 	end
 			wait(0.10)
@@ -2485,7 +2499,6 @@ end
 coroutine.wrap(VIBXX_fake_script)()
 end)
 print(b)
-oldcon()
 local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
 local chatico = tbar.LeftFrame.ChatIcon.Background.Icon
 local UIS = game:GetService("UserInputService")
@@ -2561,3 +2574,13 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
     changechatico()
 end)
 
+local UIS = game:GetService("UserInputService")
+UIS.InputBegan:Connect(function(input, gameProcessedEvent)
+	if input.KeyCode == Enum.KeyCode.Tab then
+		if game:GetService("CoreGui").playerlist.PlayerListContainer.Visible == true then
+		    game:GetService("CoreGui").playerlist.PlayerListContainer.Visible = false
+        else
+            game:GetService("CoreGui").playerlist.PlayerListContainer.Visible = true
+        end
+	end
+end)
