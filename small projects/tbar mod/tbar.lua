@@ -2656,6 +2656,7 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
 end)
 
 game:GetService("CoreGui").ThemeProvider.TopBarFrame.RightFrame.MoreMenu:Destroy()
+game:GetService("CoreGui").ThemeProvider.TopBarFrame.RightFrame.Position = UDim2.new(1, -4, 0, 0)
 
 local UIS = game:GetService("UserInputService")
 UIS.InputBegan:Connect(function(input, gameProcessedEvent)
