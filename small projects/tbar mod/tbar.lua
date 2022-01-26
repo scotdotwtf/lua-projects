@@ -2655,7 +2655,7 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
     changechatico()
 end)
 
-game:GetService("CoreGui").ThemeProvider.TopBarFrame.RightFrame.MoreMenu:Destroy()
+game:GetService("CoreGui").ThemeProvider.TopBarFrame.RightFrame.MoreMenu.Visible = false
 game:GetService("CoreGui").ThemeProvider.TopBarFrame.RightFrame.Position = UDim2.new(1, -4, 0, 0)
 
 local UIS = game:GetService("UserInputService")
