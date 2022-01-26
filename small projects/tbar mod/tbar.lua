@@ -2655,6 +2655,8 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
     changechatico()
 end)
 
+game:GetService("CoreGui").ThemeProvider.TopBarFrame.RightFrame.MoreMenu:Destroy()
+
 local UIS = game:GetService("UserInputService")
 UIS.InputBegan:Connect(function(input, gameProcessedEvent)
 	if input.KeyCode == Enum.KeyCode.Tab then
