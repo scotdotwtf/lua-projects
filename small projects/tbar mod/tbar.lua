@@ -2359,7 +2359,6 @@ local a, b = pcall(function()
 local playerlist = Instance.new("ScreenGui")
 local PlayerListContainer = Instance.new("Frame")
 local ScrollList = Instance.new("ScrollingFrame")
-local UIListLayout = Instance.new("UIListLayout")
 local PopupClipFrame = Instance.new("Frame")
 local You = Instance.new("Frame")
 local BGFrame = Instance.new("TextButton")
@@ -2456,26 +2455,29 @@ playerlist.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 PlayerListContainer.Name = "PlayerListContainer"
 PlayerListContainer.Parent = playerlist
 PlayerListContainer.BackgroundTransparency = 1.000
-PlayerListContainer.Position = UDim2.new(1, -170, 0, 2)
+PlayerListContainer.Position = UDim2.new(1, -170, 0, 15)
 PlayerListContainer.Size = UDim2.new(0, 170, 0.5, 0)
 
 ScrollList.Name = "ScrollList"
+ScrollList.Active = true
+ScrollList.Size = UDim2.new(0, -570, 1, 0)
+ScrollList.SizeConstraint = Enum.SizeConstraint.RelativeYY
 ScrollList.Parent = PlayerListContainer
-ScrollList.AutomaticCanvasSize = Enum.AutomaticSize.Y
+ScrollList.Position = UDim2.new(1, -170, -0.07, 0)
 ScrollList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ScrollList.BackgroundTransparency = 1.000
+ScrollList.ClipsDescendants = false
+ScrollList.BackgroundTransparency = 1
 ScrollList.BorderSizePixel = 0
-ScrollList.Selectable = false
-ScrollList.Size = UDim2.new(0, 170, 1, 0)
-ScrollList.BottomImage = "rbxasset://textures/ui/scroll-bottom.png"
-ScrollList.CanvasSize = UDim2.new(0, 0, 0, 500)
-ScrollList.MidImage = "rbxasset://textures/ui/scroll-middle.png"
 ScrollList.ScrollBarThickness = 0
-ScrollList.TopImage = "rbxasset://textures/ui/scroll-top.png"
+local plr23 = 0
+game.RunService.Heartbeat:Connect(function()
+    if plr23 > 10 then
+        ScrollList.ScrollingEnabled = true
+        else
+        ScrollList.ScrollingEnabled = false
+    end
+end)
 
-UIListLayout.Parent = ScrollList
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 2)
 
 PopupClipFrame.Archivable = false
 PopupClipFrame.Name = "PopupClipFrame"
@@ -2522,62 +2524,97 @@ PlayerName.TextStrokeTransparency = 0.750
 PlayerName.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Scripts:
-
-local function VIBXX_fake_script() -- PlayerListContainer.LocalScript 
+local friend = ""
+local t = false
+local m1 = 0
+local m2 = 0
+function plrr()
 	for _,v in pairs(game.Players:GetChildren()) do
 		local ex = scriptt.You:Clone()
-		ex.Name = v.Name
-		ex.Parent = scriptt.Parent.ScrollList
-		ex.BGFrame.PlayerName.Text = v.Name
-		spawn(function()
-	       if  v:IsFriendsWith(game.Players.LocalPlayer.UserId) then
-		        scriptt.Parent.ScrollList:FindFirstChild(v.Name).BGFrame.MembershipIcon.Image = "rbxasset://textures/ui/icon_friends_16.png"
-	        end
-		end)
-		game.Players.PlayerRemoving:Connect(function(p)
-			if p.Name == ex.BGFrame.PlayerName.Text then
-			    wait(0.10)
-				local target = scriptt.Parent.ScrollList:FindFirstChild(p.Name)
-				target:Destroy()
-				table.remove(idcodes, p.UserId)
-				wait(0.10)
-			end
-		end)
-	end
-		game.Players.PlayerAdded:Connect(function(p)
-		    for _,v in pairs(scriptt.Parent.ScrollList:GetChildren()) do
-                if v:IsA("Frame") then
-                    v:Destroy()
-                end
+		ex.BGFrame.MouseButton1Click:Connect(function()
+		    if t == false then
+		        t = true
+		    if ScrollList:FindFirstChild("adpr") then
+            ScrollList:FindFirstChild("adpr"):Destroy()
+            ex.BGFrame.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+            	for _,brtt in pairs(scriptt.Parent.ScrollList:GetChildren()) do
+                    brtt.BGFrame.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+	            end
 		    end
-	for _,v in pairs(game.Players:GetChildren()) do
-	    spawn(function()
-		local ex = scriptt.You:Clone()
+		    
+		    friend = ex:Clone()
+		    ex.BGFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
+		    heartbeat:Connect(function()
+	            if game.Players:FindFirstChild(ex.Name):IsFriendsWith(game.Players.LocalPlayer.UserId) then
+		            ex.BGFrame.MembershipIcon.Image = "rbxasset://textures/ui/icon_friends_16.png"
+		            else
+		            ex.BGFrame.MembershipIcon.Image = ""
+	            end
+		    end)
+
+		    friend.Parent = ScrollList
+		    friend.BGFrame.MembershipIcon:Destroy()
+		    friend.Name = "adpr"
+		    friend.BGFrame.Position = ex.BGFrame.Position + UDim2.new(0, -171, 0, 0)
+		    heartbeat:Connect(function()
+                if game.Players:FindFirstChild(ex.Name):IsFriendsWith(game.Players.LocalPlayer.UserId) then
+                    friend.BGFrame.PlayerName.Text = "Unfriend"
+                else
+                    friend.BGFrame.PlayerName.Text = "Friend"
+	            end
+	        end)
+		    friend.BGFrame.MouseButton1Click:Connect(function()
+		        if friend.BGFrame.PlayerName.Text == "Friend" then
+		        game.Players.LocalPlayer:RequestFriendship(game.Players:FindFirstChild(ex.Name))
+		        else
+		        friend.BGFrame.PlayerName.Text = "Friend"
+		        game.Players.LocalPlayer:RevokeFriendship(game.Players:FindFirstChild(ex.Name))
+		        ex.BGFrame.MembershipIcon.Image = ""
+		        end
+		    end)
+		    else
+		        t = false
+		        		    if ScrollList:FindFirstChild("adpr") then
+            ScrollList:FindFirstChild("adpr"):Destroy()
+            ex.BGFrame.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+            	for _,brtt in pairs(scriptt.Parent.ScrollList:GetChildren()) do
+                    brtt.BGFrame.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+	            end
+		    end
+
+		    end
+		end)
 		ex.Name = v.Name
 		ex.Parent = scriptt.Parent.ScrollList
 		ex.BGFrame.PlayerName.Text = v.Name
+		m1 = m1 + 25
+		ex.Position = UDim2.new(0, 0, 0, m1)
 		spawn(function()
 	       if  v:IsFriendsWith(game.Players.LocalPlayer.UserId) then
 		        scriptt.Parent.ScrollList:FindFirstChild(v.Name).BGFrame.MembershipIcon.Image = "rbxasset://textures/ui/icon_friends_16.png"
 	        end
 		end)
-		game.Players.PlayerRemoving:Connect(function(p)
-			if p.Name == ex.BGFrame.PlayerName.Text then
-			    wait(0.10)
-				local target = scriptt.Parent.ScrollList:FindFirstChild(p.Name)
-				target:Destroy()
-				table.remove(idcodes, p.UserId)
-				wait(0.10)
-			end
-		end)
-		end)
 	end
-			wait(0.10)
-		end)
 end
-coroutine.wrap(VIBXX_fake_script)()
+
+plrr()
+game.Players.PlayerRemoving:Connect(function(p)
+	for _,v in pairs(scriptt.Parent.ScrollList:GetChildren()) do
+        v:Destroy()
+	end
+    m1 = 0
+    plrr()
 end)
 
+game.Players.PlayerAdded:Connect(function(p)
+	for _,v in pairs(scriptt.Parent.ScrollList:GetChildren()) do
+        v:Destroy()
+	end
+    m1 = 0
+    plrr()
+end)
+
+end)
 print(b)
 
 local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
@@ -2668,6 +2705,3 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
         end
 	end
 end)
-
-
-
