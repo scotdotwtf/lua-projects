@@ -2678,9 +2678,9 @@ if #game.Teams:GetChildren() == 0 then
             tww2:Play()
 		    game.RunService.Heartbeat:Connect(function()
 	            if game.Players:FindFirstChild(ex.Name):IsFriendsWith(game.Players.LocalPlayer.UserId) then
-		            ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = "rbxasset://textures/ui/icon_friends_16.png"
+		            ex:WaitForChild("BGFrame"):WaitForChild("MembershipIcon").Image = "rbxasset://textures/ui/icon_friends_16.png"
 		            else
-		            ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = ""
+		            ex:WaitForChild("BGFrame"):WaitForChild("MembershipIcon").Image = ""
 	            end
 		    end)
 
@@ -2689,10 +2689,10 @@ if #game.Teams:GetChildren() == 0 then
 		    friend.Name = "adpr"
 		    friend:FindFirstChild("BGFrame"):TweenPosition(ex:FindFirstChild("BGFrame").Position + UDim2.new(0, -171, 0, 0), "Out", "Sine", 0.1)
 	        game.RunService.Heartbeat:Connect(function()
-	        if ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image == "rbxasset://textures/ui/icon_friends_16.png" then
-		       friend:FindFirstChild("BGFrame").PlayerName.Text = "Unfriend"
-		       elseif ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image == "" then
-		       friend:FindFirstChild("BGFrame").PlayerName.Text = "Friend"
+	        if ex:WaitForChild("BGFrame"):WaitForChild("MembershipIcon").Image == "rbxasset://textures/ui/icon_friends_16.png" then
+		       friend:WaitForChild("BGFrame"):WaitForChild("PlayerName").Text = "Unfriend"
+		       elseif ex:WaitForChild("BGFrame"):FindFirstChild("MembershipIcon").Image == "" then
+		       friend:WaitForChild("BGFrame"):WaitForChild("PlayerName").Text = "Friend"
 	        end
 	        end)
 		    friend:FindFirstChild("BGFrame").MouseButton1Click:Connect(function()
@@ -2862,3 +2862,7 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
         end
 	end
 end)
+
+
+
+
