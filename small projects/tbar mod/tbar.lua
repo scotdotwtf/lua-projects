@@ -2355,6 +2355,7 @@ InputService.InputBegan:connect(function(a)
    end
 end)
 end
+oldcon()
 local a, b = pcall(function()
 local playerlist = Instance.new("ScreenGui")
 local PlayerListContainer = Instance.new("Frame")
@@ -2459,16 +2460,15 @@ PlayerListContainer.Position = UDim2.new(1, -170, 0, 0)
 PlayerListContainer.Size = UDim2.new(0, 170, 0.5, 0)
 
 ScrollList.Name = "ScrollList"
-ScrollList.Active = true
-ScrollList.CanvasSize = UDim2.new(0, 0, 0, 500)
 ScrollList.Size = UDim2.new(0, -570, 1, 0)
 ScrollList.Parent = PlayerListContainer
-ScrollList.Position = UDim2.new(1, 0, -0.06, 0)
+ScrollList.Position = UDim2.new(1, 0, 0.01, 0)
 ScrollList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ScrollList.ClipsDescendants = true
 ScrollList.BackgroundTransparency = 1
 ScrollList.BorderSizePixel = 0
 ScrollList.ScrollBarThickness = 0
+ScrollList.CanvasSize = UDim2.new(0, 0, 4, 0)
 
 local plr23 = 0
 for _,v in pairs(game.Players:GetChildren()) do
@@ -2526,7 +2526,15 @@ PlayerName.TextSize = 14.000
 PlayerName.TextStrokeColor3 = Color3.fromRGB(34, 34, 34)
 PlayerName.TextStrokeTransparency = 0.750
 PlayerName.TextXAlignment = Enum.TextXAlignment.Left
-
+function collidesWith(gui1, gui2) ---A little different wording but it serves the same purpose
+    local gui1_topLeft = gui1.AbsolutePosition
+	    local gui1_bottomRight = gui1_topLeft + gui1.AbsoluteSize
+ 
+	    local gui2_topLeft = gui2.AbsolutePosition
+    local gui2_bottomRight = gui2_topLeft + gui2.AbsoluteSize
+	 
+	    return ((gui1_topLeft.x < gui2_bottomRight.x and gui1_bottomRight.x > gui2_topLeft.x) and (gui1_topLeft.y < gui2_bottomRight.y and gui1_bottomRight.y > gui2_topLeft.y))
+end
 -- Scripts:
 local friend = ""
 local t = false
@@ -2534,9 +2542,12 @@ local tss = game:GetService("TweenService")
 local m1 = 0
 local m2 = 0
 function plrr()
-	for _,v in pairs(game.Players:GetChildren()) do
-		local ex = scriptt.You:Clone()
-		ex:FindFirstChild("BGFrame").MouseButton1Click:Connect(function()
+if #game.Teams:GetChildren() == 0 then
+                local ex = scriptt.You:Clone()
+            ex.Parent = ScrollList
+            ex.Name = v.Name
+            ex.Position = UDim2.new(0, -170, 0, (#ScrollList:GetChildren() - 1) * 26)
+            ex:FindFirstChild("BGFrame").MouseButton1Click:Connect(function()
 		    if t == false then
 		        t = true
 		        		    if ScrollList:FindFirstChild("adpr") then
@@ -2549,9 +2560,11 @@ function plrr()
                     local tww = tss:Create(ex:FindFirstChild("BGFrame"), TweenInfo.new(0.3), g)
                     tww:Play()
                     for _,brtt in pairs(scriptt.Parent.ScrollList:GetChildren()) do
+                        if brtt.Name ~= "teamthingdontcoloridk" then
                     local g = {BackgroundColor3 = Color3.fromRGB(31, 31, 31)}
                     local tww = tss:Create(brtt:FindFirstChild("BGFrame"), TweenInfo.new(0.3), g)
                     tww:Play()
+                    end
 	            end
 		    end
 
@@ -2560,23 +2573,29 @@ function plrr()
 		    local g2 = {BackgroundColor3 = Color3.fromRGB(0, 255, 255)}
             local tww2 = tss:Create(ex:FindFirstChild("BGFrame"), TweenInfo.new(0.2), g2)
             tww2:Play()
-		    heartbeat:Connect(function()
+		    game.RunService.Heartbeat:Connect(function()
 	            if game.Players:FindFirstChild(ex.Name):IsFriendsWith(game.Players.LocalPlayer.UserId) then
-		            ex:FindFirstChild("BGFrame").MembershipIcon.Image = "rbxasset://textures/ui/icon_friends_16.png"
+		            ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = "rbxasset://textures/ui/icon_friends_16.png"
 		            else
-		            ex:FindFirstChild("BGFrame").MembershipIcon.Image = ""
+		            ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = ""
 	            end
 		    end)
 
 		    friend.Parent = ScrollList
-		    friend:FindFirstChild("BGFrame").MembershipIcon:Destroy()
+		    friend:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon"):Destroy()
 		    friend.Name = "adpr"
 		    friend:FindFirstChild("BGFrame"):TweenPosition(ex:FindFirstChild("BGFrame").Position + UDim2.new(0, -171, 0, 0), "Out", "Sine", 0.1)
-	        if ex:FindFirstChild("BGFrame").MembershipIcon.Image == "rbxasset://textures/ui/icon_friends_16.png" then
+	        spawn(function()
+	            while wait() do
+	        game.RunService.Heartbeat:Connect(function()
+	        if ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image == "rbxasset://textures/ui/icon_friends_16.png" then
 		       friend:FindFirstChild("BGFrame").PlayerName.Text = "Unfriend"
-		       elseif ex:FindFirstChild("BGFrame").MembershipIcon.Image == "" then
+		       elseif ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image == "" then
 		       friend:FindFirstChild("BGFrame").PlayerName.Text = "Friend"
 	        end
+	        end)
+	        end
+	        end)
 		    friend:FindFirstChild("BGFrame").MouseButton1Click:Connect(function()
 		        if friend:FindFirstChild("BGFrame").PlayerName.Text == "Friend" then
 		        game.Players.LocalPlayer:RequestFriendship(game.Players:FindFirstChild(ex.Name))
@@ -2585,7 +2604,7 @@ function plrr()
 		        else
 		        friend:FindFirstChild("BGFrame").PlayerName.Text = "Friend"
 		        game.Players.LocalPlayer:RevokeFriendship(game.Players:FindFirstChild(ex.Name))
-		        ex:FindFirstChild("BGFrame").MembershipIcon.Image = ""
+		        ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = ""
 		        end
 		    end)
 		    else
@@ -2601,24 +2620,126 @@ function plrr()
                     tww:Play()
                     
                     for _,brtt in pairs(scriptt.Parent.ScrollList:GetChildren()) do
+                        if brtt.Name ~= "teamthingdontcoloridk" then
                     local g = {BackgroundColor3 = Color3.fromRGB(31, 31, 31)}
                     local tww = tss:Create(brtt:FindFirstChild("BGFrame"), TweenInfo.new(0.3), g)
                     tww:Play()
+                    end
 	            end
 		    end
 		    end
 		end)
-		ex.Name = v.Name
-		ex.Parent = scriptt.Parent.ScrollList
-		ex:FindFirstChild("BGFrame").PlayerName.Text = v.Name
-		m1 = m1 + 25
-		ex.Position = UDim2.new(0, -170, 0, m1)
-		spawn(function()
-	       if  v:IsFriendsWith(game.Players.LocalPlayer.UserId) then
-		        scriptt.Parent.ScrollList:FindFirstChild(v.Name):FindFirstChild("BGFrame").MembershipIcon.Image = "rbxasset://textures/ui/icon_friends_16.png"
+            ex.BGFrame.PlayerName.Text = v.Name
+            spawn(function()
+	           if v:IsFriendsWith(game.Players.LocalPlayer.UserId) then
+		            scriptt.Parent.ScrollList:FindFirstChild(v.Name):FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = "rbxasset://textures/ui/icon_friends_16.png"
+	            end
+            end)
+	    else
+	        for _,Team in next, game.Teams:GetChildren() do
+    local exa = scriptt.You:Clone()
+    exa.Parent = ScrollList
+    exa.Name = "teamthingdontcoloridk"
+    exa.BGFrame.BackgroundColor = Team.TeamColor
+    exa.Position = UDim2.new(0, -170, 0, (#ScrollList:GetChildren() - 1) * 26)
+    exa.BGFrame.PlayerName.Text = Team.Name
+    
+    for _,v in next, game.Players:GetChildren() do
+        if v.Team == Team then
+                        local ex = scriptt.You:Clone()
+            ex.Parent = ScrollList
+            ex.Name = v.Name
+            ex.Position = UDim2.new(0, -170, 0, (#ScrollList:GetChildren() - 1) * 26)
+            ex:FindFirstChild("BGFrame").MouseButton1Click:Connect(function()
+		    if t == false then
+		        t = true
+		        		    if ScrollList:FindFirstChild("adpr") then
+		        		        spawn(function()
+		        		        		        		        		    friend:FindFirstChild("BGFrame"):TweenPosition(ex:FindFirstChild("BGFrame").Position, "Out", "Sine", 0.1)
+            wait(0.08)
+            ScrollList:FindFirstChild("adpr"):Destroy()
+            end)
+                                local g = {BackgroundColor3 = Color3.fromRGB(31, 31, 31)}
+                    local tww = tss:Create(ex:FindFirstChild("BGFrame"), TweenInfo.new(0.3), g)
+                    tww:Play()
+                    for _,brtt in pairs(scriptt.Parent.ScrollList:GetChildren()) do
+                        if brtt.Name ~= "teamthingdontcoloridk" then
+                    local g = {BackgroundColor3 = Color3.fromRGB(31, 31, 31)}
+                    local tww = tss:Create(brtt:FindFirstChild("BGFrame"), TweenInfo.new(0.3), g)
+                    tww:Play()
+                    end
+	            end
+		    end
+
+		    
+		    friend = ex:Clone()
+		    local g2 = {BackgroundColor3 = Color3.fromRGB(0, 255, 255)}
+            local tww2 = tss:Create(ex:FindFirstChild("BGFrame"), TweenInfo.new(0.2), g2)
+            tww2:Play()
+		    game.RunService.Heartbeat:Connect(function()
+	            if game.Players:FindFirstChild(ex.Name):IsFriendsWith(game.Players.LocalPlayer.UserId) then
+		            ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = "rbxasset://textures/ui/icon_friends_16.png"
+		            else
+		            ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = ""
+	            end
+		    end)
+
+		    friend.Parent = ScrollList
+		    friend:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon"):Destroy()
+		    friend.Name = "adpr"
+		    friend:FindFirstChild("BGFrame"):TweenPosition(ex:FindFirstChild("BGFrame").Position + UDim2.new(0, -171, 0, 0), "Out", "Sine", 0.1)
+	        game.RunService.Heartbeat:Connect(function()
+	        if ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image == "rbxasset://textures/ui/icon_friends_16.png" then
+		       friend:FindFirstChild("BGFrame").PlayerName.Text = "Unfriend"
+		       elseif ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image == "" then
+		       friend:FindFirstChild("BGFrame").PlayerName.Text = "Friend"
 	        end
+	        end)
+		    friend:FindFirstChild("BGFrame").MouseButton1Click:Connect(function()
+		        if friend:FindFirstChild("BGFrame").PlayerName.Text == "Friend" then
+		        game.Players.LocalPlayer:RequestFriendship(game.Players:FindFirstChild(ex.Name))
+		        repeat wait() until game.Players:FindFirstChild(ex.Name):IsFriendsWith(game.Players.LocalPlayer.UserId)
+		        friend:FindFirstChild("BGFrame").PlayerName.Text = "Unfriend"
+		        else
+		        friend:FindFirstChild("BGFrame").PlayerName.Text = "Friend"
+		        game.Players.LocalPlayer:RevokeFriendship(game.Players:FindFirstChild(ex.Name))
+		        ex:FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = ""
+		        end
+		    end)
+		    else
+		        t = false
+		        		    if ScrollList:FindFirstChild("adpr") then
+		        		        spawn(function()
+		        		        		        		        		    friend:FindFirstChild("BGFrame"):TweenPosition(ex:FindFirstChild("BGFrame").Position, "Out", "Sine", 0.1)
+            wait(0.08)
+            ScrollList:FindFirstChild("adpr"):Destroy()
+            end)
+                                local g = {BackgroundColor3 = Color3.fromRGB(31, 31, 31)}
+                    local tww = tss:Create(ex:FindFirstChild("BGFrame"), TweenInfo.new(0.3), g)
+                    tww:Play()
+                    
+                    for _,brtt in pairs(scriptt.Parent.ScrollList:GetChildren()) do
+                        if brtt.Name ~= "teamthingdontcoloridk" then
+                    local g = {BackgroundColor3 = Color3.fromRGB(31, 31, 31)}
+                    local tww = tss:Create(brtt:FindFirstChild("BGFrame"), TweenInfo.new(0.3), g)
+                    tww:Play()
+                    end
+	            end
+		    end
+		    end
 		end)
-	end
+            ex.BGFrame.PlayerName.Text = v.Name
+            spawn(function()
+	           if v:IsFriendsWith(game.Players.LocalPlayer.UserId) then
+		            scriptt.Parent.ScrollList:FindFirstChild(v.Name):FindFirstChild("BGFrame"):FindFirstChild("MembershipIcon").Image = "rbxasset://textures/ui/icon_friends_16.png"
+	            end
+		    end)
+
+        end
+    end
+end
+
+end
 end
 
 plrr()
@@ -2631,6 +2752,7 @@ end
         v:Destroy()
 	end
     m1 = 0
+    m2 = 0
     plrr()
 end)
 
@@ -2643,6 +2765,7 @@ end
         v:Destroy()
 	end
     m1 = 0
+    m2 = 0
     plrr()
 end)
 
@@ -2652,7 +2775,7 @@ print(b)
 local tbar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
 local chatico = tbar.LeftFrame.ChatIcon.Background.Icon
 local UIS = game:GetService("UserInputService")
-
+game.RunService.Heartbeat:Connect(function()
 tbar.Transparency = 0.5
 tbar.BorderSizePixel = 0
 tbar.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
@@ -2681,7 +2804,7 @@ tbar.LeftFrame.MenuIcon.Background.Icon.Image = "rbxasset://textures/ui/Menu/Ham
 tbar.LeftFrame.ChatIcon.Background.StateOverlay.Image = ""
 tbar.RightFrame.MoreMenu.OpenButton.StateOverlay.Image = ""
 tbar.LeftFrame.MenuIcon.Background.StateOverlay.Image = ""
-
+end)
 if chatico.Image == "rbxasset://textures/ui/TopBar/chatOff.png" then
     chatico.Image = "rbxasset://textures/ui/Chat/Chat@2x.png"
 elseif chatico.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
@@ -2708,14 +2831,14 @@ game.RunService.Heartbeat:Connect(function()
     game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.ImageRectOffset = Vector2.new(0, 0)
     game.CoreGui.ThemeProvider.LegacyCloseMenu.CloseMenuButton.ImageRectSize = Vector2.new(0, 0)
     if tbar.LeftFrame.ChatIcon:FindFirstChild("BadgeContainer") then
-        if tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge") then
-        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner.Image = "rbxasset://textures/ui/Chat/MessageCounter.png"
-        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner.ImageRectOffset = Vector2.new(0, 0)
-        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner.ImageRectSize = Vector2.new(0, 0)
-        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner:ClearAllChildren()
-        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Inner.ScaleType = Enum.ScaleType.Fit
-        if tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge"):FindFirstChild("Background") then
-        tbar.LeftFrame.ChatIcon.BadgeContainer:WaitForChild("Badge").Background:Destroy()
+        if tbar.LeftFrame.ChatIcon.BadgeContainer:FindFirstChild("Badge") then
+        tbar.LeftFrame.ChatIcon.BadgeContainer:FindFirstChild("Badge").Inner.Image = "rbxasset://textures/ui/Chat/MessageCounter.png"
+        tbar.LeftFrame.ChatIcon.BadgeContainer:FindFirstChild("Badge").Inner.ImageRectOffset = Vector2.new(0, 0)
+        tbar.LeftFrame.ChatIcon.BadgeContainer:FindFirstChild("Badge").Inner.ImageRectSize = Vector2.new(0, 0)
+        tbar.LeftFrame.ChatIcon.BadgeContainer:FindFirstChild("Badge").Inner:ClearAllChildren()
+        tbar.LeftFrame.ChatIcon.BadgeContainer:FindFirstChild("Badge").Inner.ScaleType = Enum.ScaleType.Fit
+        if tbar.LeftFrame.ChatIcon.BadgeContainer:FindFirstChild("Badge"):FindFirstChild("Background") then
+        tbar.LeftFrame.ChatIcon.BadgeContainer:FindFirstChild("Badge").Background:Destroy()
         end
         end
     else
@@ -2739,3 +2862,7 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
         end
 	end
 end)
+
+
+
+
