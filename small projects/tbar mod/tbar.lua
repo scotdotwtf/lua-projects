@@ -2862,7 +2862,3 @@ UIS.InputBegan:Connect(function(input, gameProcessedEvent)
         end
 	end
 end)
-
-
-
-
