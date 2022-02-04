@@ -2777,6 +2777,11 @@ local chatico = tbar.LeftFrame.ChatIcon.Background.Icon
 local UIS = game:GetService("UserInputService")
 tbar.RightFrame.HealthBar:Destroy()
 game.RunService.Heartbeat:Connect(function()
+if game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency < 0.8 or game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency < 0.7 then
+game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency = 0.1
+end
+end)
+game.RunService.Heartbeat:Connect(function()
 tbar.Transparency = 0.5
 tbar.BorderSizePixel = 0
 tbar.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
