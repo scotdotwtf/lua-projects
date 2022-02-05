@@ -3005,3 +3005,18 @@ game.RunService.Heartbeat:Connect(function()
         return nil
     end
 end)
+for _,v in pairs(game:GetDescendants()) do
+    if v:IsA("TextLabel") and v.Text == "Chat '/?' or '/help' for a list of chat commands." then
+        v.Text = "Please chat '/?' for a list of commands"
+    end
+    if v:IsA("TextLabel") and v.Name == "BubbleText" then
+        v.Font = Enum.Font.Legacy
+        v.TextSize = 13
+    end
+end
+game.DescendantAdded:Connect(function(v)
+    if v.Name == "BubbleText" then
+        v.Font = Enum.Font.Legacy
+        v.TextSize = 13
+    end
+end)
