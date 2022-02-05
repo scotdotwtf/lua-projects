@@ -1,7 +1,134 @@
+wait(0.3)
+local Gui = Instance.new("ScreenGui")
 if not game:IsLoaded() then
-    game.Loaded:Wait()
+local ImageLabel = Instance.new("ImageLabel")
+local ImageLabel_2 = Instance.new("ImageLabel")
+local title = Instance.new("TextLabel")
+local byc = Instance.new("TextLabel")
+local server = Instance.new("TextLabel")
+local TextLabel = Instance.new("TextLabel")
+local LoadingGui = game.CoreGui:FindFirstChild("RobloxLoadingGui")
+if LoadingGui then
+
+LoadingGui.Enabled = false
+
+game:GetService("TeleportService"):SetTeleportGui(Gui)
+
+Gui.Name = "Africking2016UIREPLICA"
+Gui.Parent = game:WaitForChild("CoreGui")
+Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Gui.Enabled = true
+ImageLabel.Parent = Gui
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.Position = UDim2.new(0, 0, -0.0965189859, 0)
+ImageLabel.Size = UDim2.new(1, 0, 1, 90)
+ImageLabel.Image = "rbxasset://textures/loading/darkLoadingTexture.png"
+ImageLabel.ScaleType = Enum.ScaleType.Tile
+ImageLabel.SliceScale = 0.000
+ImageLabel.TileSize = UDim2.new(0.300000012, 0, 0.300000012, 0)
+
+ImageLabel_2.Parent = ImageLabel
+ImageLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel_2.BackgroundTransparency = 1.000
+ImageLabel_2.BorderSizePixel = 0
+ImageLabel_2.Position = UDim2.new(0.861751139, 0, 0.787970304, 0)
+ImageLabel_2.Size = UDim2.new(0, 100, 0, 100)
+ImageLabel_2.Image = "rbxasset://textures/loading/loadingCircle.png"
+ImageLabel_2.ScaleType = Enum.ScaleType.Tile
+ImageLabel_2.SliceScale = 100.000
+
+title.Name = "title"
+title.Parent = ImageLabel
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1.000
+title.Position = UDim2.new(0.0129032256, 0, 0.787803769, 0)
+title.Size = UDim2.new(0, 334, 0, 50)
+title.Font = Enum.Font.SourceSans
+title.Text = "Grabbing Game Name"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextScaled = true
+title.TextSize = 20.000
+title.TextWrapped = true
+title.TextXAlignment = Enum.TextXAlignment.Left
+
+byc.Name = "byc"
+byc.Parent = ImageLabel
+byc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+byc.BackgroundTransparency = 1.000
+byc.Position = UDim2.new(0.0129032256, 0, 0.86691767, 0)
+byc.Size = UDim2.new(0, 90, 0, 39)
+byc.Font = Enum.Font.SourceSans
+byc.Text = "Getting username..."
+byc.TextColor3 = Color3.fromRGB(255, 255, 255)
+byc.TextSize = 20.000
+byc.TextWrapped = false
+byc.TextXAlignment = Enum.TextXAlignment.Left
+
+server.Name = "server"
+server.Parent = ImageLabel
+server.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+server.BackgroundTransparency = 1.000
+server.Position = UDim2.new(0.44389534, 0, 0.867244601, 0)
+server.Size = UDim2.new(0, 150, 0, 39)
+server.Font = Enum.Font.SourceSansBold
+server.Text = "Loading server"
+server.TextColor3 = Color3.fromRGB(255, 255, 255)
+server.TextSize = 14.000
+server.TextWrapped = true
+
+TextLabel.Parent = ImageLabel
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.876301765, 0, 0.834405065, 0)
+TextLabel.Size = UDim2.new(0, 60, 0, 26)
+TextLabel.Font = Enum.Font.SourceSansSemibold
+TextLabel.Text = "Loading."
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 14.000
+spawn(function()
+title.Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+byc.TextScaled = false
+byc.Text = "By "..game.Players:GetNameFromUserIdAsync(game.CreatorId)
+end)
+-- Scripts:
+spawn(function()
+local function NOUUU_fake_script() -- ImageLabel_2.LocalScript 
+	local script = Instance.new('LocalScript', ImageLabel_2)
+    spawn(function()
+	while wait() do
+		script.Parent.Rotation = script.Parent.Rotation + 7
+	end
+	end)
 end
-wait(1)
+coroutine.wrap(NOUUU_fake_script)()
+
+coroutine.wrap(YXHQTQG_fake_script)()
+local function OVIF_fake_script() -- TextLabel.LocalScript 
+	local script = Instance.new('LocalScript', TextLabel)
+    spawn(function()
+
+	while wait(1) do
+		script.Parent.Text = "Loading."
+		wait(1)
+		script.Parent.Text = "Loading.."
+		wait(1)
+		script.Parent.Text = "Loading..."
+		wait(1)
+		script.Parent.Text = "Loading"
+		wait(1)
+	end
+	end)
+end
+coroutine.wrap(OVIF_fake_script)()
+end)
+end
+end
+wait(0.20)
+if not game:IsLoaded() then
+game.Loaded:Wait()
+end
+Gui:Destroy()
+wait(0.5)
 local runserv = game.RunService
 local heartbeat = runserv.Heartbeat
 function oldcon()
