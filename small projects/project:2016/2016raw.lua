@@ -3156,7 +3156,7 @@ end
 game.DescendantAdded:Connect(function(v)
     if v.Name == "BubbleText" then
         v.Font = Enum.Font.SourceSans
-        v.TextSize = 13
+        v.TextSize = 18
     end
 end)
 
