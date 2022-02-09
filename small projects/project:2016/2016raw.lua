@@ -3155,7 +3155,7 @@ for _,v in pairs(game:GetDescendants()) do
 end
 game.DescendantAdded:Connect(function(v)
     if v.Name == "BubbleText" then
-        v.Font = Enum.Font.Legacy
+        v.Font = Enum.Font.SourceSans
         v.TextSize = 13
     end
 end)
