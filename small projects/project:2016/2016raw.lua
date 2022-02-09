@@ -3150,13 +3150,13 @@ for _,v in pairs(game:GetDescendants()) do
     end
     if v:IsA("TextLabel") and v.Name == "BubbleText" then
         v.Font = Enum.Font.SourceSans
-        v.TextSize = 18
+        v.TextSize = 24
     end
 end
 game.DescendantAdded:Connect(function(v)
     if v.Name == "BubbleText" then
         v.Font = Enum.Font.SourceSans
-        v.TextSize = 18
+        v.TextSize = 24
     end
 end)
 
