@@ -3159,3 +3159,6 @@ game.DescendantAdded:Connect(function(v)
         v.TextSize = 13
     end
 end)
+
+local mouse = game.Players.LocalPlayer:GetMouse()
+mouse.Icon = 'http://www.roblox.com/asset/?id=8772256433'
