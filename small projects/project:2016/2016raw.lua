@@ -3149,8 +3149,8 @@ for _,v in pairs(game:GetDescendants()) do
         v.Text = "Please chat '/?' for a list of commands"
     end
     if v:IsA("TextLabel") and v.Name == "BubbleText" then
-        v.Font = Enum.Font.Legacy
-        v.TextSize = 13
+        v.Font = Enum.Font.SourceSans
+        v.TextSize = 18
     end
 end
 game.DescendantAdded:Connect(function(v)
