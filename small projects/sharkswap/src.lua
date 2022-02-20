@@ -7,7 +7,7 @@ print([[
      \/     \/     \/           \/     \/               \/|__|    
 
 // * by spec * //
-
+ALSO CHECK THE BOTTEM OF THE SRC CODE TO FIND COOL AUDIO ID'S OK TY
 ]])
 
 --// Make stuff
