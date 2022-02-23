@@ -856,10 +856,12 @@ mouseh.Position = UDim2.new(0, mh.X - 32, 0, mh.Y + 1)
 uis.MouseIconEnabled = false
 uis.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
 mh.Icon = "rbxassetid://000001"
-else
-local mouse = game.Players.LocalPlayer:GetMouse()
-mouse.Icon = 'http://www.roblox.com/asset/?id=8772256433'
 end)
+
+if badmouse == false then
+    local mouse = game.Players.LocalPlayer:GetMouse()
+    mouse.Icon = 'http://www.roblox.com/asset/?id=8772256433' 
+end
 
 for _,v in pairs(game:GetDescendants()) do
     if v:IsA("TextLabel") and v.Text == "Chat '/?' or '/help' for a list of chat commands." then
