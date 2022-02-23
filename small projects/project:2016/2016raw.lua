@@ -858,11 +858,6 @@ uis.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
 mh.Icon = "rbxassetid://000001"
 end)
 
-if badmouse == false then
-    local mouse = game.Players.LocalPlayer:GetMouse()
-    mouse.Icon = 'http://www.roblox.com/asset/?id=8772256433' 
-end
-
 for _,v in pairs(game:GetDescendants()) do
     if v:IsA("TextLabel") and v.Text == "Chat '/?' or '/help' for a list of chat commands." then
         v.Text = "Please chat '/?' for a list of commands"
@@ -909,6 +904,12 @@ game.DescendantAdded:Connect(function(v)
     end
 end)
 end
+
+if badmouse == false then
+    local mouse = game.Players.LocalPlayer:GetMouse()
+    mouse.Icon = 'http://www.roblox.com/asset/?id=8772256433' 
+end
+
 local backpackicon = tbar.LeftFrame.ChatIcon:Clone()
 local a, b = pcall(function()
 backpackicon.Parent = tbar
