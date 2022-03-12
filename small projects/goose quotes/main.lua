@@ -1,27 +1,33 @@
 --// Locals
-local quotes = {"am goose hjonk", "good work", "🦆", "nsfd asdas sorry hard to type withh feet", "i cause problems on purpose", "peace was never an option", "am goose", "honk honk", "peace truly was never an option", "i steel u food", "i eat ur crops"} 
 local players = game:GetService('Players')
-local prefix = ";"
+local quotes = {"am goose hjonk", "good work", "🦆", "nsfd asdas sorry hard to type withh feet", "i cause problems on purpose", "peace was never an option", "am goose", "honk honk", "peace truly was never an option", "i steel u food", "i eat ur crops"} 
+local wabbys = {"wabby weebo", "waddo wabby wabbo woaboo wop", "behbapbow bhow", "DraGdVA", "VHAvEVAa", "wabby", "weebo", "beDragFha haBha"}
+local prefix = ">"
 local prefixv = "goose"
-local ver = "1.0.1"
+local ver = "1.0.2c"
 
-local function sayquote()
-    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(quotes[math.random(#quotes)].." -the goose [goose qoutes v"..ver.."]", "All")
+local function csay(tex)
+    wait(0.1)
+    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(tex, "All")
 end
 
 --// Script
 spawn(function()
     players.PlayerChatted:Connect(function(PlayerChatType, sender, message, recipient)
         if message == prefix..prefixv then
-            sayquote() 
+            csay(quotes[math.random(#quotes)].." -the goose [goose qoutes "..ver.."]") 
+        elseif message == prefix.."duck" then
+            csay("is u that dumb? HOW DO U NOT KNOW THE DIFFERENCE BETWEEN DUCK AND GOOSE?!")
+        elseif message == prefix.."crazydave" then
+            csay(wabbys[math.random(#wabbys)])
         end
     end)
 end)
 
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("goose quote [by spec] loaded! 🦆🦆 say "..prefix..prefixv.." for a goose quote! 🦆🦆 [gquote "..ver.."]", "All")
+csay("goose quote [by spec] loaded! 🦆🦆 say "..prefix..prefixv.." for a goose quote! 🦆🦆 [gquote "..ver.."] *or try to find secret cmds*", "All")
 
 spawn(function()
     while wait(120) do
-        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("🦆🦆 just a reminder to say "..prefix..prefixv.." for a goose quote! 🦆🦆 [gquote "..ver.."]", "All")
+        csay("🦆🦆 just a reminder to say "..prefix..prefixv.." for a goose quote! 🦆🦆 [gquote "..ver.."]", "All")
     end
 end)
