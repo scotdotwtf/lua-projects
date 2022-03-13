@@ -3316,11 +3316,10 @@ oldcon()
 
 local cam = workspace.CurrentCamera
 
-script.Parent.Parent.Character.Humanoid.Changed:connect(function(val)
-if script.Parent.Parent.Character.Humanoid.Sit == true then
+game.Players.LocalPlayer.Character.Humanoid.Changed:connect(function(val)
+if game.Players.LocalPlayer.Parent.Parent.Character.Humanoid.Sit == true then
 wait(1)
 cam.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
 cam.CameraType = "Attached" 
-script:Remove()
 end 
 end)
