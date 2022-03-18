@@ -57,7 +57,7 @@ local function maketex(text)
 	tex.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	tex.BackgroundTransparency = 1.000
 	tex.Size = UDim2.new(0, 200, 0, 15)
-	tex.Font = Enum.Font.Arcade
+	tex.Font = Enum.Font.Code
 	tex.Text = "# "..text
 	tex.TextColor3 = Color3.fromRGB(255, 255, 255)
 	tex.TextSize = 14.000
