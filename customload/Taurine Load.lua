@@ -1,5 +1,7 @@
 --// funni taurine loading screen by spec
-
+local getasset = getsynasset or getcustomasset
+makefolder("loadingimages")
+writefile("loadingimages/taurine.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/customload/images/taurine.png"))
 --// make
 local funniload = Instance.new("ScreenGui")
 local taurineload = Instance.new("Frame")
@@ -29,7 +31,7 @@ logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 logo.BackgroundTransparency = 1.000
 logo.Position = UDim2.new(0.5, -166, 0.5, -31)
 logo.Size = UDim2.new(0, 333, 0, 62)
-logo.Image = "rbxassetid://9128246589"
+logo.Image = getasset("loadingimages/taurine.png")
 logo.ZIndex = 1
 
 --// scrip
