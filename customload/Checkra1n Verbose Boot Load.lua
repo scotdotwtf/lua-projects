@@ -1,3 +1,7 @@
+local getasset = getsynasset or getcustomasset
+makefolder("loadingimages")
+writefile("loadingimages/checkra1nlogo.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/customload/images/checkra1n.png"))
+
 --// funni taurine loading screen by spec
 
 --// make
@@ -26,7 +30,7 @@ logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 logo.BackgroundTransparency = 1.000
 logo.Position = UDim2.new(0.5, -55, 0.5, -74)
 logo.Size = UDim2.new(0, 110, 0, 149)
-logo.Image = "rbxassetid://9128604462"
+logo.Image = getasset("loadingimages/checkra1nlogo.png")
 
 contain.Name = "contain"
 contain.Parent = checkra1n
