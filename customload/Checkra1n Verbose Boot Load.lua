@@ -1,8 +1,7 @@
+--// funni checkra1n loading screen by spec
 local getasset = getsynasset or getcustomasset
 makefolder("loadingimages")
 writefile("loadingimages/checkra1nlogo.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/customload/images/checkra1n.png"))
-
---// funni taurine loading screen by spec
 
 --// make
 local funniload = Instance.new("ScreenGui")
