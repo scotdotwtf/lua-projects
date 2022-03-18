@@ -1,4 +1,8 @@
 --// funni unc0ver loading screen by spec
+local getasset = getsynasset or getcustomasset
+makefolder("loadingimages")
+writefile("loadingimages/unc0verlogo.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/customload/images/unc0verlogo.png"))
+writefile("loadingimages/unc0verbg.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/customload/images/unc0verbg.png"))
 
 --// make
 local funniload = Instance.new("ScreenGui")
@@ -16,7 +20,7 @@ unc0ver.BorderSizePixel = 0
 unc0ver.Position = UDim2.new(0, -50, 0, -50)
 unc0ver.Size = UDim2.new(1, 100, 1, 100)
 unc0ver.ZIndex = 0
-unc0ver.Image = "rbxassetid://9128455944"
+unc0ver.Image = getasset("loadingimages/unc0verbg.png")
 
 logo.Name = "logo"
 logo.Parent = unc0ver
@@ -24,7 +28,7 @@ logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 logo.BackgroundTransparency = 1.000
 logo.Position = UDim2.new(0.5, -203, 0.5, -42)
 logo.Size = UDim2.new(0, 407, 0, 85)
-logo.Image = "rbxassetid://9128451959"
+logo.Image = getasset("loadingimages/unc0verlogo.png")
 
 --// scrip
 local LoadingGui = game:WaitForChild("CoreGui"):WaitForChild("RobloxLoadingGui")
