@@ -1,6 +1,6 @@
 --// set this as u want
 local hat = "Nerd" --// hat link is https://www.roblox.com/catalog/9120783085/Nerd-Alert but u can set it to a dif hat if u feel
-local debug_prints = false --// prints when something happens ex: when script welds get deleted
+local debug_prints = true --// prints when something happens ex: when script welds get deleted
 
 --// keep these as defualt
 local VER = "1.0.0c"
@@ -26,6 +26,15 @@ local function debugprint(text)
 end
 
 local function clearwelds()
+    --// vel loop
+    spawn(function()
+        game:GetService("RunService").Heartbeat:connect(function()
+            game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat):WaitForChild("Handle").Velocity = Vector3.new(0, 35, 0)
+        end)
+    debugprint("vel loopd'd for script welds")
+    end)
+    wait()
+    
     --// delete script attachments
     if game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle:FindFirstChild("Attachment") then
         game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle:FindFirstChild("Attachment"):Destroy()
@@ -42,10 +51,11 @@ local function renerd()
     --// vel loop
     spawn(function()
         game:GetService("RunService").Heartbeat:connect(function()
-            nerd:WaitForChild("Handle").Velocity = Vector3.new(0, 35, 0)
+            game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat):WaitForChild("Handle").Velocity = Vector3.new(0, 35, 0)
         end)
     debugprint("vel loopd'd")
     end)
+    wait()
     
     --// delete hat attachment
     if game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle:FindFirstChild("AccessoryWeld") then
@@ -147,7 +157,7 @@ l2.Padding = UDim.new(0, 4)
 local function weld(part0, part1, att1)
     local att0 = Instance.new("Attachment", part0)
     if part0 == nerd.Handle then
-        att0.Position = Vector3.new(0, 0.5, 0)
+        att0.Position = Vector3.new(0, 0, 0)
         att0.Rotation = Vector3.new(0, 0, 0)
     end
     local AP = Instance.new("AlignPosition", part0)
@@ -158,7 +168,7 @@ local function weld(part0, part1, att1)
     AP.ReactionForceEnabled = false
     AP.MaxForce = 64060 * part0.Size.X * part0.Size.Y * part0.Size.Z * part1.Size.X * part1.Size.Y * part1.Size.Z
     AP.MaxVelocity = math.huge / 9e110
-    AP.Responsiveness = math.huge / 9e110
+    AP.Responsiveness = math.huge * math.huge * math.huge * math.huge
     local AO = Instance.new("AlignOrientation", part0)
     AO.Attachment0 = att0
     AO.Attachment1 = att1
@@ -167,7 +177,7 @@ local function weld(part0, part1, att1)
     AO.PrimaryAxisOnly = false
     AO.MaxTorque = 42060 * part0.Size.X * part0.Size.Y * part0.Size.Z * part1.Size.X * part1.Size.Y * part1.Size.Z
     AO.MaxAngularVelocity = math.huge / 9e110
-    AO.Responsiveness = math.huge / 9e110
+    AO.Responsiveness = math.huge * math.huge * math.huge * math.huge
 end
 
 --// drag
