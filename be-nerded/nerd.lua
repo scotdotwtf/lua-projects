@@ -18,6 +18,7 @@ local hb_2 = Instance.new("TextButton")
 local c = Instance.new("Frame")
 local cb = Instance.new("TextButton")
 local l2 = Instance.new("UIListLayout")
+local e = Instance.new("TextButton")
 
 local function debugprint(text)
     if debug_prints == true then
@@ -154,6 +155,112 @@ l2.FillDirection = Enum.FillDirection.Horizontal
 l2.SortOrder = Enum.SortOrder.LayoutOrder
 l2.Padding = UDim.new(0, 4)
 
+e.Name = "e"
+e.Parent = c
+e.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+e.BackgroundTransparency = 0.750
+e.BorderColor3 = Color3.fromRGB(0, 0, 0)
+e.Size = UDim2.new(0, 23, 0, 23)
+e.Font = Enum.Font.RobotoMono
+e.Text = "e"
+e.TextColor3 = Color3.fromRGB(255, 255, 255)
+e.TextSize = 14.000
+
+--// extra make
+local ed = Instance.new("Frame")
+local l3 = Instance.new("UIListLayout")
+local en = Instance.new("TextLabel")
+local hn = Instance.new("TextButton")
+local mhn = Instance.new("TextButton")
+local fb = Instance.new("TextButton")
+local ec = Instance.new("Frame")
+local l4 = Instance.new("UIListLayout")
+local ce = Instance.new("TextButton")
+
+--// extra define
+ed.Name = "ed"
+ed.Parent = ngui
+ed.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+ed.BackgroundTransparency = 0.500
+ed.BorderColor3 = Color3.fromRGB(25, 25, 25)
+ed.Position = UDim2.new(0.309374988, 0, 0.139814824, 0)
+ed.Size = UDim2.new(0, 232, 0, 176)
+ed.ZIndex = 0
+ed.Visible = false
+
+l3.Name = "l3"
+l3.Parent = ed
+l3.HorizontalAlignment = Enum.HorizontalAlignment.Center
+l3.SortOrder = Enum.SortOrder.LayoutOrder
+l3.Padding = UDim.new(0, 4)
+
+en.Name = "en"
+en.Parent = ed
+en.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+en.BackgroundTransparency = 1.000
+en.Position = UDim2.new(0.241379306, 0, 0, 0)
+en.Size = UDim2.new(0, 139, 0, 28)
+en.Font = Enum.Font.RobotoMono
+en.Text = "extra nerdy stuff"
+en.TextColor3 = Color3.fromRGB(255, 255, 255)
+en.TextSize = 14.000
+
+hn.Name = "hn"
+hn.Parent = ed
+hn.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+hn.BackgroundTransparency = 0.750
+hn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+hn.Size = UDim2.new(0, 218, 0, 34)
+hn.Font = Enum.Font.RobotoMono
+hn.Text = "hide nerd"
+hn.TextColor3 = Color3.fromRGB(255, 255, 255)
+hn.TextSize = 14.000
+
+mhn.Name = "mhn"
+mhn.Parent = ed
+mhn.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+mhn.BackgroundTransparency = 0.750
+mhn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+mhn.Size = UDim2.new(0, 218, 0, 34)
+mhn.Font = Enum.Font.RobotoMono
+mhn.Text = "make person hold nerd"
+mhn.TextColor3 = Color3.fromRGB(255, 255, 255)
+mhn.TextSize = 14.000
+
+fb.Name = "fb"
+fb.Parent = ed
+fb.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+fb.BackgroundTransparency = 0.750
+fb.BorderColor3 = Color3.fromRGB(0, 0, 0)
+fb.Size = UDim2.new(0, 218, 0, 34)
+fb.Font = Enum.Font.RobotoMono
+fb.Text = "make follow behind"
+fb.TextColor3 = Color3.fromRGB(255, 255, 255)
+fb.TextSize = 14.000
+
+ec.Name = "ec"
+ec.Parent = ed
+ec.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ec.BackgroundTransparency = 1.000
+ec.Size = UDim2.new(0, 218, 0, 23)
+
+l4.Name = "l4"
+l4.Parent = ec
+l4.FillDirection = Enum.FillDirection.Horizontal
+l4.SortOrder = Enum.SortOrder.LayoutOrder
+l4.Padding = UDim.new(0, 4)
+
+ce.Name = "ce"
+ce.Parent = ec
+ce.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+ce.BackgroundTransparency = 0.750
+ce.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ce.Size = UDim2.new(0, 23, 0, 23)
+ce.Font = Enum.Font.RobotoMono
+ce.Text = "x"
+ce.TextColor3 = Color3.fromRGB(255, 255, 255)
+ce.TextSize = 14.000
+
 local function weld(part0, part1, att1)
     local att0 = Instance.new("Attachment", part0)
     if part0 == nerd.Handle then
@@ -217,11 +324,55 @@ function dragify(Frame)
     end)
 end
 
+function zdragify(Frame)
+	zdragToggle = nil
+	local zdragSpeed = 0
+	zdragInput = nil
+	zdragStart = nil
+	local zdragPos = nil
+	function zupdateInput(input)
+		local zDelta = input.Position - zdragStart
+		local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + zDelta.X, startPos.Y.Scale, startPos.Y.Offset + zDelta.Y)
+		game:GetService("TweenService"):Create(Frame, TweenInfo.new(zdragSpeed), {Position = Position}):Play()
+	end
+	Frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+			zdragToggle = true
+			zdragStart = input.Position
+			startPos = Frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					zdragToggle = false
+				end
+			end)
+		end
+	end)
+	Frame.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			zdragInput = input
+		end
+	end)
+	game:GetService("UserInputService").InputChanged:Connect(function(input)
+		if input == zdragInput and zdragToggle then
+			zupdateInput(input)
+		end
+	end)
+end
+
 dragify(d)
+zdragify(ed)
 
 --// buttons
 cb.MouseButton1Click:Connect(function()
     ngui:Destroy()
+end)
+
+e.MouseButton1Click:Connect(function()
+    ed.Visible = true
+end)
+
+ce.MouseButton1Click:Connect(function()
+    ed.Visible = false
 end)
 
 hb.MouseButton1Click:Connect(function()
@@ -242,6 +393,49 @@ hb_2.MouseButton1Click:Connect(function()
     weld(game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle, players.LocalPlayer.Character["Left Arm"], players.LocalPlayer.Character["Left Arm"].LeftGripAttachment)
     wait()
     game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle.Attachment.Position = Vector3.new(0, 0.5, 0)
+end)
+
+--[[
+local ed = Instance.new("Frame")
+local l3 = Instance.new("UIListLayout")
+local en = Instance.new("TextLabel")
+local hn = Instance.new("TextButton")
+local mhn = Instance.new("TextButton")
+local fb = Instance.new("TextButton")
+local ec = Instance.new("Frame")
+local l4 = Instance.new("UIListLayout")
+local ce = Instance.new("TextButton")
+]]
+
+hn.MouseButton1Click:Connect(function()
+    renerd()
+    clearwelds()
+    wait()
+    weld(game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle, players.LocalPlayer.Character["HumanoidRootPart"], players.LocalPlayer.Character["HumanoidRootPart"].RootAttachment)
+    wait()
+    game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle.Attachment.Position = Vector3.new(0, 10, 0)
+end)
+
+mhn.MouseButton1Click:Connect(function()
+    local person = game.Players:FindFirstChild(p.Text).Character
+    
+    renerd()
+    clearwelds()
+    wait()
+    weld(game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle, person["Left Arm"], person["Left Arm"].LeftGripAttachment)
+    wait()
+    game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle.Attachment.Position = Vector3.new(0, 0.5, 0)
+end)
+
+fb.MouseButton1Click:Connect(function()
+    local person = game.Players:FindFirstChild(p.Text).Character
+    
+    renerd()
+    clearwelds()
+    wait()
+    weld(game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle, person["Head"], person["Head"].HatAttachment)
+    wait()
+    game:GetService("Players").LocalPlayer.Character:FindFirstChild(hat).Handle.Attachment.Position = Vector3.new(-2, 0.5, -2)
 end)
 
 warn([[
