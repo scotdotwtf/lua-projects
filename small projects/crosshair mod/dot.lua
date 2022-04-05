@@ -1,12 +1,10 @@
 --// ~ simple crosshair by spec ~ //--
 
 --// ~ settings
-
 local white = true --// ~ set to false for black crosshair
 local gta4outline = true --// ~ set to true for gta 4 type crosshair
 
 --// ~ make crosshair
-
 local crosshair = Instance.new("ScreenGui")
 local imgframe = Instance.new("ImageLabel")
 
@@ -18,7 +16,7 @@ imgframe.Parent = crosshair
 imgframe.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 imgframe.BackgroundTransparency = 1.000
 imgframe.BorderSizePixel = 0
-imgframe.Position = UDim2.new(0.473958343, 0, 0.453703701, 0)
+imgframe.Position = UDim2.new(0.473958343, 0, 0.453703701, -20)
 imgframe.Size = UDim2.new(0, 100, 0, 100)
 
 if white == true then
