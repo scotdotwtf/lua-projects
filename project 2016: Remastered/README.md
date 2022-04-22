@@ -5,3 +5,7 @@
 ```lua
 print("coming soon!")
 ```
+# Credits:
+- cola (did most/almost all of the scripting for the original)
+- spec (fixed a huge amount of bugs so now it works better lol) (also made the original idea)
+## original repo: https://github.com/specowos/lua-projects/tree/main/small%20projects/project:2016
