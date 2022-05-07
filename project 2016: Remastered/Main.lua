@@ -2,7 +2,7 @@
 --[[ 
     things to be added:
 
-    - dev console
+    - teams
     - mods
 ]]
 
@@ -13,6 +13,8 @@ warn("\n"..[[
     - made code a lil better
     - based off the original source
     - original by me and mainly all the work from cola
+
+    - also credit to luatsuki/Wally/Josh#0903 (idk) for the old console script :>
 
     // spec
 
@@ -25,21 +27,6 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 wait()
-
---// config settings
-getgenv().config = {
-    old_console = false,
-    old_plist = true,
-    old_graphics = true,
-    dev = false
-}
-
---// mods
-getgenv().mods = {
-    fps_counter = false,
-    built_in_silentre = false,
-    c00l_mode = false
-}
 
 --// variables/modules
 local CoreGui = game:GetService("CoreGui")
@@ -134,6 +121,37 @@ end
 local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 mouse.Icon = 'rbxasset://textures/ArrowFarCursor.png'
 
+--// fps mod *runs before health bar script
+if mods.fps_counter then
+    local fps_counter = Instance.new("TextLabel")
+
+    fps_counter.Name = "fps_counter"
+    fps_counter.Parent = TopBar.RightFrame
+    fps_counter.BackgroundTransparency = 1
+    fps_counter.Size = UDim2.new(0, 35, 0, 32)
+    fps_counter.Font = Enum.Font.SourceSans
+    fps_counter.TextColor3 = Color3.fromRGB(255, 255, 255)
+    fps_counter.TextSize = 16.000
+    fps_counter.TextXAlignment = Enum.TextXAlignment.Right
+
+    local FPS = 0
+    local Tiempo = tick()
+
+    spawn(function()
+        while game:GetService("RunService").RenderStepped:wait() do
+            local Transcurrido = math.abs(Tiempo-tick())
+            Tiempo = tick()
+            FPS = math.floor(1/Transcurrido)
+        end
+    end)
+
+    spawn(function()
+        while wait(0.25) do
+            fps_counter.Text = "FPS: "..tostring(FPS) 
+        end
+    end)
+end
+
 --// health bar scripts
 TopBar.RightFrame.HealthBar:Destroy()
 
@@ -203,15 +221,17 @@ spawn(function()
 end)
 
 --// chat scripts
-spawn(function()
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar:IsFocused() then
-            game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency = 0.1
-        else
-            game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency = game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency
-        end
+if not mods.c00l_mode then
+    spawn(function()
+        game:GetService("RunService").Heartbeat:Connect(function()
+            if game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar:IsFocused() then
+                game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency = 0.1
+            else
+                game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency = game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency
+            end
+        end)
     end)
-end)
+end
 
 local function changechatico()
     if ChatIcon.Image == "rbxasset://textures/ui/TopBar/chatOff.png" then
@@ -247,7 +267,9 @@ game.RunService.Heartbeat:Connect(function()
         game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
     end
     TopBar.LeftFrame.MenuIcon.Background.StateOverlay.Image = ""
-    game.CoreGui:WaitForChild("ThemeProvider").LegacyCloseMenu.CloseMenuButton.Image = "rbxasset://textures/ui/Menu/HamburgerDown.png"
+    if not c00l_mode then
+        game.CoreGui:WaitForChild("ThemeProvider").LegacyCloseMenu.CloseMenuButton.Image = "rbxasset://textures/ui/Menu/HamburgerDown.png"
+    end
     game.CoreGui:WaitForChild("ThemeProvider").LegacyCloseMenu.CloseMenuButton.ImageRectOffset = Vector2.new(0, 0)
     game.CoreGui:WaitForChild("ThemeProvider").LegacyCloseMenu.CloseMenuButton.ImageRectSize = Vector2.new(0, 0)
     if TopBar.RightFrame:FindFirstChild("MoreMenu") then
@@ -280,7 +302,7 @@ ExtraFrame.BackgroundTransparency = 1
 ELayout.FillDirection = Enum.FillDirection.Horizontal
 ELayout.SortOrder = Enum.SortOrder.LayoutOrder
 ELayout.VerticalAlignment = Enum.VerticalAlignment.Center
-ELayout.Padding = UDim.new(0, 12)
+ELayout.Padding = UDim.new(0, -8)
 
 local BackpackIcon = Instance.new("TextButton", ExtraFrame) --// fuck roblox for making there listlayout broken and making me having to get the manual placement grrr :angry_1:
 local BackpackIcon_Background = Instance.new("ImageButton", BackpackIcon)
@@ -302,13 +324,15 @@ Background_Icon.BackgroundTransparency = 1
 Background_Icon.Position = UDim2.new(0, 0, 0, 3)
 Background_Icon.Size = UDim2.new(0, 25, 0, 27)
 
-game.RunService.Heartbeat:Connect(function()
-    if game.CoreGui.RobloxGui.Backpack.Inventory.Visible == true then
-        Background_Icon.Image = "rbxasset://textures/ui/Backpack/Backpack_Down@2x.png"
-        else
-        Background_Icon.Image = "rbxasset://textures/ui/Backpack/Backpack@2x.png"
-    end
-end)
+if not mods.c00l_mode then
+    game.RunService.Heartbeat:Connect(function()
+        if game.CoreGui.RobloxGui.Backpack.Inventory.Visible == true then
+            Background_Icon.Image = "rbxasset://textures/ui/Backpack/Backpack_Down@2x.png"
+            else
+            Background_Icon.Image = "rbxasset://textures/ui/Backpack/Backpack@2x.png"
+        end
+    end)
+end
 
 --/ In the original cola gave up on the backpack thing, I dont blame him but my simple solution is to just make it so your client presses a key. lol
 BackpackIcon_Background.MouseButton1Click:Connect(function()
@@ -317,6 +341,10 @@ BackpackIcon_Background.MouseButton1Click:Connect(function()
     keyrelease(0xC0)  
 end)
 
+--/console
+if config.old_console then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/modules/old_console.lua"))()
+end
 
 --/ playerlist
 if config.old_plist then
@@ -549,4 +577,164 @@ if config.old_plist then
             end
         end
     end)
+end
+
+--// mods
+-- i would put fps here but it needs to run before health bar so yeah
+
+--// silent re
+if mods.built_in_silentre then
+    devprint("silent re was able to load")
+    writefile("2016_storage/Re.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/Fixed%20Re%20Icon.png"))
+
+    local SilentIcon = Instance.new("TextButton", ExtraFrame) --// fuck roblox for making there listlayout broken and making me having to get the manual placement grrr :angry_1:
+    local SilentIcon_Background = Instance.new("ImageButton", SilentIcon)
+    local Silent_Icon = Instance.new("ImageLabel", SilentIcon_Background)
+
+    SilentIcon.Name = "SilentIcon"
+    SilentIcon.BackgroundTransparency = 1
+    SilentIcon.Position = UDim2.new(0, 0, 0, -34)
+    SilentIcon.Size = UDim2.new(0, 50, 0, 36)
+    SilentIcon.Text = ""
+
+    SilentIcon_Background.Name = "Background"
+    SilentIcon_Background.BackgroundTransparency = 1
+    SilentIcon_Background.Position = UDim2.new(0, 0, 0, 0)
+    SilentIcon_Background.Size = UDim2.new(0, 30, 0, 32)
+
+    Silent_Icon.Name = "Icon"
+    Silent_Icon.BackgroundTransparency = 1
+    Silent_Icon.Position = UDim2.new(0, 0, 0, 3)
+    Silent_Icon.Size = UDim2.new(0, 25, 0, 27)
+    Silent_Icon.Image = getasset("2016_storage/Re.png")
+    Silent_Icon.ScaleType = Enum.ScaleType.Fit
+
+    SilentIcon_Background.MouseButton1Click:Connect(function()
+        if game.PlaceId == 5100950559 or game.PlaceId == 6048573718 or game.PlaceId == 6446409152 then
+            game:GetService("Players"):Chat("-re")
+        else
+            local plr = game:GetService("Players").LocalPlayer
+            local char = plr.Character
+
+            local Human = plr.Character and plr.Character:FindFirstChildOfClass("Humanoid", true)
+            local pos = Human and Human.RootPart and Human.RootPart.CFrame
+            local pos1 = workspace.CurrentCamera.CFrame
+
+            if char:FindFirstChildOfClass("Humanoid") then
+                char:FindFirstChildOfClass("Humanoid"):ChangeState(15)
+            end
+
+            char:ClearAllChildren()
+            local newChar = Instance.new("Model")
+            newChar.Parent = workspace
+            plr.Character = newChar
+            wait()
+            plr.Character = char
+            newChar:Destroy()
+
+            task.spawn(function()
+                plr.CharacterAdded:Wait():WaitForChild("Humanoid").RootPart.CFrame, workspace.CurrentCamera.CFrame = pos, wait() and pos1
+                refreshCmd = false
+            end)
+        end
+    end)
+    end
+
+    if mods.c00l_mode then
+    devprint("c00l was able to load")
+    writefile("2016_storage/c00lest.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/fixed%20c00l%20button.png"))
+    writefile("2016_storage/redchatico.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/RedChatDown%402x.png"))
+    writefile("2016_storage/redbpico.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/RedBackpack_Down%402x.png"))
+    writefile("2016_storage/redmenu.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/RedHamburgerDown%402x.png"))
+
+    local C00lIcon = Instance.new("TextButton", ExtraFrame) --// fuck roblox for making there listlayout broken and making me having to get the manual placement grrr :angry_1:
+    local C00lIcon_Background = Instance.new("ImageButton", C00lIcon)
+    local C00l_Icon = Instance.new("ImageLabel", C00lIcon_Background)
+
+    C00lIcon.Name = "SilentIcon"
+    C00lIcon.BackgroundTransparency = 1
+    C00lIcon.Position = UDim2.new(0, 0, 0, -34)
+    C00lIcon.Size = UDim2.new(0, 50, 0, 36)
+    C00lIcon.Text = ""
+
+    C00lIcon_Background.Name = "Background"
+    C00lIcon_Background.BackgroundTransparency = 1
+    C00lIcon_Background.Position = UDim2.new(0, 0, 0, 0)
+    C00lIcon_Background.Size = UDim2.new(0, 30, 0, 32)
+
+    C00l_Icon.Name = "Icon"
+    C00l_Icon.BackgroundTransparency = 1
+    C00l_Icon.Position = UDim2.new(0, 0, 0, 3)
+    C00l_Icon.Size = UDim2.new(0, 25, 0, 27)
+    C00l_Icon.Image = getasset("2016_storage/c00lest.png")
+    C00l_Icon.ScaleType = Enum.ScaleType.Fit
+
+    C00lIcon_Background.MouseButton1Click:Connect(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/MiRw3b/c00lgui-v3rx/main/c00lguiv3rx"))()
+    end)
+
+    --// cool mode things
+    TopBar.Transparency = 0
+    TopBar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+
+    local function c00l_chat_func()
+        if ChatIcon.Image == "rbxasset://textures/ui/TopBar/chatOff.png" then
+            ChatIcon.Image = "rbxasset://textures/ui/Chat/Chat@2x.png"
+        elseif ChatIcon.Image == "rbxasset://textures/ui/TopBar/chatOn.png" then
+            ChatIcon.Image = getasset("2016_storage/redchatico.png")
+        end	
+    end
+
+    ChatIcon.Visible = false
+    wait()
+    c00l_chat_func()
+    ChatIcon.Visible = true
+
+    spawn(function()
+        game:GetService("RunService").Heartbeat:Connect(function()
+            c00l_chat_func()
+        end)
+    end)
+
+    spawn(function()
+        game.RunService.Heartbeat:Connect(function()
+            if game.CoreGui.RobloxGui.Backpack.Inventory.Visible == true then
+                Background_Icon.Image = getasset("2016_storage/redbpico.png")
+                else
+                Background_Icon.Image = "rbxasset://textures/ui/Backpack/Backpack@2x.png"
+            end
+        end)
+    end)
+
+    spawn(function()
+        game.RunService.Heartbeat:Connect(function()
+            game.CoreGui:WaitForChild("ThemeProvider").LegacyCloseMenu.CloseMenuButton.Image = getasset("2016_storage/redmenu.png")
+        end)
+    end)
+
+    spawn(function()
+        game:GetService("RunService").Heartbeat:Connect(function()
+            if game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar:IsFocused() then
+                game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency = 0.1
+            else
+                game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency = game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.BackgroundTransparency
+            end
+        end)
+    end)
+
+    local cc = Instance.new("ColorCorrectionEffect")
+    local lighting = game:GetService("Lighting")
+
+    --// setup
+    lighting.FogColor = Color3.fromRGB(0, 0, 0)
+    lighting.FogEnd = 1500
+    lighting.OutdoorAmbient = Color3.fromRGB(255, 0, 0)
+    lighting.ClockTime = 0
+
+    cc.Parent = game.Lighting
+    cc.Saturation = -0.1
+    cc.Contrast = -0.1
+    cc.TintColor = Color3.fromRGB(255, 150, 150)
 end
