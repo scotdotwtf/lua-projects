@@ -3,7 +3,6 @@
     things to be added:
 
     - teams
-    - mods
 ]]
 
 warn("\n"..[[
