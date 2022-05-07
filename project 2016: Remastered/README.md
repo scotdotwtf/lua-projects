@@ -3,7 +3,7 @@
 - Want a less buggy and a better version?
 ## check this out:
 ```lua
-print("coming soon!")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/Main.lua"))()
 ```
 # Credits:
 - cola (did most/almost all of the scripting for the original)
