@@ -1,6 +1,28 @@
 --// load old loading screen before anything else
 loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/modules/old_load.lua"))()
 
+--[[
+
+    --// REMEMBER IF U ARE BUILDING THIS YOURSELF WITHOUT LOADSTRING U MUST HAVE THE SETTINGS TABLE, UNCOMMENT THIS BLOCK
+
+    --// config settings
+    getgenv().config = {
+        old_console = true,
+        old_plist = true,
+        old_graphics = true,
+        dev = false
+    }
+
+    --// mods
+    getgenv().mods = {
+        fps_counter = false,
+        built_in_silentre = false,
+        c00l_mode = false
+    }
+
+]]
+
+
 --// FEW DONT WORK *yet* WILL BE ADDED!
 --[[ 
     things to be added:
