@@ -1,5 +1,5 @@
 if not game:IsLoaded() then
-    --// funni unc0ver loading screen by spec
+    --// funni loading screen by spec
     --[[
     // not gonna use getasset anymore cause its slow
     
@@ -9,6 +9,12 @@ if not game:IsLoaded() then
         writefile("loadingimages/bluespin.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/loadingCircle.png"))
 
     ]]
+
+    --// destroy loading gui before anything else    
+    local LoadingGui = game:WaitForChild("CoreGui"):WaitForChild("RobloxLoadingGui")
+    LoadingGui.Enabled = false
+    LoadingGui:Destroy()
+
 
     local spin = true
 
@@ -26,7 +32,7 @@ if not game:IsLoaded() then
     funniload.Name = "funniload"
     funniload.Parent = game:WaitForChild("CoreGui")
 
-    bg.Name = "unc0ver"
+    bg.Name = "bg"
     bg.Parent = funniload
     bg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     bg.BorderSizePixel = 0
@@ -99,9 +105,6 @@ if not game:IsLoaded() then
 
     --// scrip
     local spin = false
-    local LoadingGui = game:WaitForChild("CoreGui"):WaitForChild("RobloxLoadingGui")
-    LoadingGui.Enabled = false
-    LoadingGui:Destroy()
 
     if not game:IsLoaded() then
         game.Loaded:Wait()
