@@ -1,3 +1,6 @@
+--// load old loading screen before anything else
+loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/modules/old_load.lua"))()
+
 --// FEW DONT WORK *yet* WILL BE ADDED!
 --[[ 
     things to be added:
@@ -18,9 +21,6 @@ warn("\n"..[[
     // spec
 
 ]])
-
---// load old loading screen before anything else
-loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/modules/old_load.lua"))()
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
