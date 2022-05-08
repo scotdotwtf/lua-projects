@@ -1,9 +1,14 @@
 if not game:IsLoaded() then
     --// funni unc0ver loading screen by spec
-    local getasset = getsynasset or getcustomasset
-    makefolder("loadingimages")
-    writefile("loadingimages/bg.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/darkLoadingTexture.png"))
-    writefile("loadingimages/bluespin.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/loadingCircle.png"))
+    --[[
+    // not gonna use getasset anymore cause its slow
+    
+        local getasset = getsynasset or getcustomasset
+        makefolder("loadingimages")
+        writefile("loadingimages/bg.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/darkLoadingTexture.png"))
+        writefile("loadingimages/bluespin.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/loadingCircle.png"))
+
+    ]]
 
     local spin = true
 
@@ -28,7 +33,10 @@ if not game:IsLoaded() then
     bg.Position = UDim2.new(0, -50, 0, -50)
     bg.Size = UDim2.new(1, 100, 1, 100)
     bg.ZIndex = 0
-    bg.Image = getasset("loadingimages/bg.png")
+    bg.Image = "rbxasset://textures/loading/darkLoadingTexture.png"
+    --[[ saving for when roblox deletes that
+        bg.Image = getasset("loadingimages/bg.png")
+    ]]
     --// tile effect
     bg.ScaleType = Enum.ScaleType.Tile
     bg.TileSize = UDim2.new(0, 512, 0, 512)
@@ -40,7 +48,10 @@ if not game:IsLoaded() then
     logo.Position = UDim2.new(0.861751139, 0, 0.787970304, 0)
     logo.Size = UDim2.new(0, 128, 0, 128)
     logo.ZIndex = 1
-    logo.Image = getasset("loadingimages/bluespin.png")
+    logo.Image = "rbxasset://textures/loading/loadingCircle.png"
+    --[[ saving for when roblox deletes that
+        logo.Image = getasset("loadingimages/bluespin.png")
+    ]]
     --// rotate effect
     spawn(function()
         while spin do
