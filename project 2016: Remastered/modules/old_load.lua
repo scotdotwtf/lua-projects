@@ -99,13 +99,26 @@ if not game:IsLoaded() then
     owner_loadtext.Position = UDim2.new(0.07, 0, 0.826, 0)
     owner_loadtext.Size = UDim2.new(0, 90, 0, 39)
 
-
-    --// owner text
-    owner_loadtext.Text = "By "..game.Players:GetNameFromUserIdAsync(game.CreatorId)
-    --// game text
-    game_loadtext.Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+    spawn(function()
+        --// game text
+        game_loadtext.Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+        --// owner text
+        owner_loadtext.Text = "By "..game.Players:GetNameFromUserIdAsync(game.CreatorId)
+    end)
 
     --// scrip
+    spawn(function()
+        while wait(1) do
+            load_text.Text = "Loading."
+            wait(1)
+            load_text.Text = "Loading.."
+            wait(1)
+            load_text.Text = "Loading..."
+            wait(1)
+            load_text.Text = "Loading"
+        end
+    end)
+
     local spin = false
 
     if not game:IsLoaded() then
