@@ -80,28 +80,30 @@ if not game:IsLoaded() then
     game_loadtext.Name = "load_text"
     game_loadtext.Parent = bg
     game_loadtext.BackgroundTransparency = 1
-    game_loadtext.Text = "Grabbing Game Name"
+    game_loadtext.Text = "Requesting game name..."
     game_loadtext.TextSize = 36
     game_loadtext.TextColor3 = Color3.fromRGB(255, 255, 255)
     game_loadtext.Font = Enum.Font.SourceSans
     game_loadtext.TextXAlignment = Enum.TextXAlignment.Left
     game_loadtext.Position = UDim2.new(0.07, 0, 0.787, 0)
     game_loadtext.Size = UDim2.new(0, 60, 0, 26)
-    --// game text
-    game_loadtext.Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 
     owner_loadtext.Name = "load_text"
     owner_loadtext.Parent = bg
     owner_loadtext.BackgroundTransparency = 1
-    owner_loadtext.Text = "Getting username..."
+    owner_loadtext.Text = "Requesting username..."
     owner_loadtext.TextSize = 28
     owner_loadtext.TextColor3 = Color3.fromRGB(255, 255, 255)
     owner_loadtext.Font = Enum.Font.SourceSans
     owner_loadtext.TextXAlignment = Enum.TextXAlignment.Left
     owner_loadtext.Position = UDim2.new(0.07, 0, 0.826, 0)
     owner_loadtext.Size = UDim2.new(0, 90, 0, 39)
+
+
     --// owner text
     owner_loadtext.Text = "By "..game.Players:GetNameFromUserIdAsync(game.CreatorId)
+    --// game text
+    game_loadtext.Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 
     --// scrip
     local spin = false
