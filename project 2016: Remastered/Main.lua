@@ -2,7 +2,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/modules/old_load.lua"))()
 
 --[[
-
+    
     --// REMEMBER IF U ARE BUILDING THIS YOURSELF WITHOUT LOADSTRING U MUST HAVE THE SETTINGS TABLE, UNCOMMENT THIS BLOCK
 
     --// config settings
@@ -21,7 +21,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects
     }
 
 ]]
-
 
 --// FEW DONT WORK *yet* WILL BE ADDED!
 --[[ 
@@ -47,15 +46,15 @@ warn("\n"..[[
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
-wait()
+wait(0.1)
 
 --// variables/modules
 local CoreGui = game:GetService("CoreGui")
 local RobloxGui = CoreGui:FindFirstChild("RobloxGui")
 local UserInputService = game:GetService("UserInputService")
 
-local TopBar = game:GetService("CoreGui").ThemeProvider.TopBarFrame
-local ChatIcon = TopBar.LeftFrame.ChatIcon.Background.Icon
+local TopBar = game:GetService("CoreGui"):WaitForChild("ThemeProvider"):WaitForChild("TopBarFrame")
+local ChatIcon = TopBar:WaitForChild("LeftFrame"):WaitForChild("ChatIcon"):WaitForChild("Background"):WaitForChild("Icon")
 
 local UIS = game:GetService("UserInputService")
 
