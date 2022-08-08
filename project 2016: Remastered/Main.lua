@@ -139,13 +139,15 @@ end
 
 --// thanks for most of the stud tex func beyond5d 😋
 for _, v in ipairs(game:GetDescendants()) do
-    if v:IsA("BasePart") and v.Material == Enum.Material.Plastic then
-	local Studs = Instance.new("Texture")
-	Studs.Parent = v
-	Studs.Face = Enum.NormalId.Top
-	Studs.Texture = "rbxassetid://7027211371"
-	Studs.Color3 = Color3.new(v.Color.R * 2, v.Color.G * 2, v.Color.B * 2)
-	Studs.Transparency = v.Transparency
+    if v:IsA("BasePart") and v.Material == Enum.Material.Plastic and v.TopSurface == Enum.SurfaceType.Studs then
+		if not v:FindFirstChildOfClass("Texture") then
+    		local Studs = Instance.new("Texture")
+    		Studs.Parent = v
+    		Studs.Face = Enum.NormalId.Top
+    		Studs.Texture = "rbxassetid://7027211371"
+    		Studs.Color3 = Color3.new(v.Color.R * 2, v.Color.G * 2, v.Color.B * 2)
+    		Studs.Transparency = v.Transparency
+		end
     end
 end
 
