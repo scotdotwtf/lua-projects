@@ -126,13 +126,13 @@ if config.old_graphics == true then
 
     --// setup
     cc.Parent = game.Lighting
-    cc.Saturation = -0.1
+    cc.Saturation = 0
     cc.Contrast = -0.1
     lighting.GlobalShadows = false
 
     sethiddenproperty(lighting, "Technology", Enum.Technology.Compatibility) 
 
-    settings().Rendering.QualityLevel = 7
+    settings().Rendering.QualityLevel = 14
 
     devprint("loaded old graphics!")
 end
@@ -757,18 +757,4 @@ if mods.built_in_silentre then
             end
         end)
     end)
-
-    local cc = Instance.new("ColorCorrectionEffect")
-    local lighting = game:GetService("Lighting")
-
-    --// setup
-    lighting.FogColor = Color3.fromRGB(0, 0, 0)
-    lighting.FogEnd = 1500
-    lighting.OutdoorAmbient = Color3.fromRGB(255, 0, 0)
-    lighting.ClockTime = 0
-
-    cc.Parent = game.Lighting
-    cc.Saturation = -0.1
-    cc.Contrast = -0.1
-    cc.TintColor = Color3.fromRGB(255, 150, 150)
 end
