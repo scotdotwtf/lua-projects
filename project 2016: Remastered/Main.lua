@@ -137,6 +137,19 @@ if config.old_graphics == true then
     devprint("loaded old graphics!")
 end
 
+--// thanks for most of the stud tex func beyond5d 😋
+for i, v in pairs(game:GetDescendants()) do
+    if v:IsA("Part") or v:IsA("BasePart") and v.Material == Enum.Material.Plastic and v.FrontSurface == Enum.SurfaceType.Studs then
+		local Studs = Instance.new("Texture")
+		Studs.Color3 = v.Color
+		Studs.Color3 = Color3.new(Studs.Color3.R * 2, Studs.Color3.G * 2, Studs.Color3.B * 2)
+		Studs.Texture = "rbxassetid://7027211371"
+		Studs.Transparency = v.Transparency
+		Studs.Face = Enum.NormalId.Top
+		Studs.Parent = v
+    end
+end
+
 --// cursor
 local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 mouse.Icon = 'rbxasset://textures/ArrowFarCursor.png'
