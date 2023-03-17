@@ -1,5 +1,5 @@
 --// load old loading screen before anything else
-loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/modules/old_load.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/modules/old_load.lua"))()
 
 --[[
     
@@ -68,9 +68,9 @@ end
 local getasset = getsynasset or getcustomasset
 makefolder("2016_storage")
 
-writefile("2016_storage/bc.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/icon_BC-16.png"))
-writefile("2016_storage/tbc.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/icon_TBC-16.png"))
-writefile("2016_storage/obc.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/icon_OBC-16.png"))
+writefile("2016_storage/bc.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/icon_BC-16.png"))
+writefile("2016_storage/tbc.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/icon_TBC-16.png"))
+writefile("2016_storage/obc.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/icon_OBC-16.png"))
 
 local bc_storage = {
     getasset("2016_storage/bc.png"),
@@ -377,7 +377,7 @@ end)
 
 --/console
 if config.old_console then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/modules/old_console.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/modules/old_console.lua"))()
 end
 
 --/ playerlist
@@ -619,7 +619,7 @@ end
 --// silent re
 if mods.built_in_silentre then
     devprint("silent re was able to load")
-    writefile("2016_storage/Re.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/Fixed%20Re%20Icon.png"))
+    writefile("2016_storage/Re.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/Fixed%20Re%20Icon.png"))
 
     local SilentIcon = Instance.new("TextButton", ExtraFrame) --// fuck roblox for making there listlayout broken and making me having to get the manual placement grrr :angry_1:
     local SilentIcon_Background = Instance.new("ImageButton", SilentIcon)
@@ -676,10 +676,10 @@ if mods.built_in_silentre then
 
     if mods.c00l_mode then
     devprint("c00l was able to load")
-    writefile("2016_storage/c00lest.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/fixed%20c00l%20button.png"))
-    writefile("2016_storage/redchatico.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/RedChatDown%402x.png"))
-    writefile("2016_storage/redbpico.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/RedBackpack_Down%402x.png"))
-    writefile("2016_storage/redmenu.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/RedHamburgerDown%402x.png"))
+    writefile("2016_storage/c00lest.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/fixed%20c00l%20button.png"))
+    writefile("2016_storage/redchatico.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/RedChatDown%402x.png"))
+    writefile("2016_storage/redbpico.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/RedBackpack_Down%402x.png"))
+    writefile("2016_storage/redmenu.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/RedHamburgerDown%402x.png"))
 
     local C00lIcon = Instance.new("TextButton", ExtraFrame) --// fuck roblox for making there listlayout broken and making me having to get the manual placement grrr :angry_1:
     local C00lIcon_Background = Instance.new("ImageButton", C00lIcon)
