@@ -1,8 +1,8 @@
 --// funni unc0ver loading screen by spec
 local getasset = getsynasset or getcustomasset
 makefolder("loadingimages")
-writefile("loadingimages/unc0verlogo.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/customload/images/unc0verlogo.png"))
-writefile("loadingimages/unc0verbg.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/customload/images/unc0verbg.png"))
+writefile("loadingimages/unc0verlogo.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/customload/images/unc0verlogo.png"))
+writefile("loadingimages/unc0verbg.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/customload/images/unc0verbg.png"))
 
 --// make
 local funniload = Instance.new("ScreenGui")
