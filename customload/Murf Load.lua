@@ -1,7 +1,7 @@
 --// funni taurine loading screen by spec
 local getasset = getsynasset or getcustomasset
 makefolder("loadingimages")
-writefile("loadingimages/murf.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/customload/images/kingroblox.png"))
+writefile("loadingimages/murf.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/customload/images/kingroblox.png"))
 
 --// make
 local funniload = Instance.new("ScreenGui")
