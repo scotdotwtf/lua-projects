@@ -53,7 +53,7 @@ local CoreGui = game:GetService("CoreGui")
 local RobloxGui = CoreGui:FindFirstChild("RobloxGui")
 local UserInputService = game:GetService("UserInputService")
 
-local TopBar = game:GetService("CoreGui"):WaitForChild("TopbarApp"):WaitForChild("TopBarFrame")
+local TopBar = game:GetService("CoreGui"):WaitForChild("TopBarApp"):WaitForChild("TopBarFrame")
 local ChatIcon = TopBar:WaitForChild("LeftFrame"):WaitForChild("ChatIcon"):WaitForChild("Background"):WaitForChild("Icon")
 
 local UIS = game:GetService("UserInputService")
@@ -96,8 +96,8 @@ TopBar.LeftFrame.MenuIcon.Position = UDim2.new(0, 0, 0, 0)
 TopBar.LeftFrame.MenuIcon.Size = UDim2.new(0, 50, 0, 36)
 TopBar.LeftFrame.MenuIcon.Background.Icon.Position = UDim2.new(0, 25, 0, 12)
 TopBar.LeftFrame.MenuIcon.Background.Icon.Size = UDim2.new(0, 32, 0, 25)
-game.CoreGui:WaitForChild("TopbarApp").LegacyCloseMenu.CloseMenuButton.Position = UDim2.new(0, -8, 0, 18)
-game.CoreGui:WaitForChild("TopbarApp").LegacyCloseMenu.CloseMenuButton.Size = UDim2.new(0, 32, 0, 25)
+game.CoreGui:WaitForChild("TopBarApp").LegacyCloseMenu.CloseMenuButton.Position = UDim2.new(0, -8, 0, 18)
+game.CoreGui:WaitForChild("TopBarApp").LegacyCloseMenu.CloseMenuButton.Size = UDim2.new(0, 32, 0, 25)
 
 TopBar.LeftFrame.ChatIcon.Position = UDim2.new(0, 0, 0, 0)
 TopBar.LeftFrame.ChatIcon.Size = UDim2.new(0, 50, 0, 36)
@@ -195,7 +195,7 @@ local HealthContainer = Instance.new("Frame")
 local HealthFill = Instance.new("Frame")
 
 NameHealthContainer.Name = "NameHealthContainer"
-NameHealthContainer.Parent = game.CoreGui:WaitForChild("TopbarApp").TopBarFrame.RightFrame
+NameHealthContainer.Parent = game.CoreGui:WaitForChild("TopBarApp").TopBarFrame.RightFrame
 NameHealthContainer.BackgroundTransparency = 1.000
 NameHealthContainer.Position = UDim2.new(1, -170, 0.027778089, 0)
 NameHealthContainer.Size = UDim2.new(0, 170, 1, 0)
@@ -302,10 +302,10 @@ game.RunService.Heartbeat:Connect(function()
     end
     TopBar.LeftFrame.MenuIcon.Background.StateOverlay.Image = ""
     if not c00l_mode then
-        game.CoreGui:WaitForChild("TopbarApp").LegacyCloseMenu.CloseMenuButton.Image = "rbxasset://textures/ui/Menu/HamburgerDown.png"
+        game.CoreGui:WaitForChild("TopBarApp").LegacyCloseMenu.CloseMenuButton.Image = "rbxasset://textures/ui/Menu/HamburgerDown.png"
     end
-    game.CoreGui:WaitForChild("TopbarApp").LegacyCloseMenu.CloseMenuButton.ImageRectOffset = Vector2.new(0, 0)
-    game.CoreGui:WaitForChild("TopbarApp").LegacyCloseMenu.CloseMenuButton.ImageRectSize = Vector2.new(0, 0)
+    game.CoreGui:WaitForChild("TopBarApp").LegacyCloseMenu.CloseMenuButton.ImageRectOffset = Vector2.new(0, 0)
+    game.CoreGui:WaitForChild("TopBarApp").LegacyCloseMenu.CloseMenuButton.ImageRectSize = Vector2.new(0, 0)
     if TopBar.RightFrame:FindFirstChild("MoreMenu") then
         TopBar.RightFrame.MoreMenu:Destroy()
     end
@@ -744,7 +744,7 @@ if mods.built_in_silentre then
 
     spawn(function()
         game.RunService.Heartbeat:Connect(function()
-            game.CoreGui:WaitForChild("TopbarApp").LegacyCloseMenu.CloseMenuButton.Image = getasset("2016_storage/redmenu.png")
+            game.CoreGui:WaitForChild("TopBarApp").LegacyCloseMenu.CloseMenuButton.Image = getasset("2016_storage/redmenu.png")
         end)
     end)
 
