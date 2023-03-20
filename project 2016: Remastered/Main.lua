@@ -53,7 +53,7 @@ local CoreGui = game:GetService("CoreGui")
 local RobloxGui = CoreGui:FindFirstChild("RobloxGui")
 local UserInputService = game:GetService("UserInputService")
 
-local TopBar = game:GetService("CoreGui"):WaitForChild("ThemeProvider"):WaitForChild("TopBarFrame")
+local TopBar = game:GetService("CoreGui"):WaitForChild("TopbarApp"):WaitForChild("TopBarFrame")
 local ChatIcon = TopBar:WaitForChild("LeftFrame"):WaitForChild("ChatIcon"):WaitForChild("Background"):WaitForChild("Icon")
 
 local UIS = game:GetService("UserInputService")
