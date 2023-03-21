@@ -381,7 +381,7 @@ end)
 
 --/console
 if config.old_console then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/modules/old_console.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ImLoadingUuU/lua-projects/main/project%202016%3A%20Remastered/modules/old_console.lua"))()
 end
 
 --/ playerlist
