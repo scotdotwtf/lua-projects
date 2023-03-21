@@ -235,21 +235,25 @@ spawn(function()
     game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Health,false)
 	local player = game.Players.LocalPlayer
 	local char = player.Character
+		local hm = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+		if not hm then
+			task.wait(1)
+			end
 	local frame = HealthContainer
 	local bar = frame.HealthFill
 	game.RunService.Heartbeat:Connect(function()
-		bar.Size = UDim2.new(0,(game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health / game.Players.LocalPlayer.Character:WaitForChild("Humanoid").MaxHealth * 160),1,0)
+		bar.Size = UDim2.new(0,(hm.Health / hm.MaxHealth * 160),1,0)
 
-        if game.Players.LocalPlayer.Character.Humanoid.Health < game.Players.LocalPlayer.Character.Humanoid.MaxHealth and game.Players.LocalPlayer.Character.Humanoid.Health > game.Players.LocalPlayer.Character.Humanoid.MaxHealth/2 then
-            bar.BackgroundColor3 = Color3.new(1-(game.Players.LocalPlayer.Character.Humanoid.Health/game.Players.LocalPlayer.Character.Humanoid.MaxHealth)+0.5,1,0)
+        if hm.Health < hm.MaxHealth and hm.Health > hm.MaxHealth/2 then
+            bar.BackgroundColor3 = Color3.new(1-(hm.Health/game.Players.LocalPlayer.Character:FindFirstChildWichIsA("Humanoid").MaxHealth)+0.5,1,0)
         else
             bar.BackgroundColor3 = Color3.fromRGB(27, 252, 107)
         end
-        if game.Players.LocalPlayer.Character.Humanoid.Health == game.Players.LocalPlayer.Character.Humanoid.MaxHealth/2 then
+        if game.Players.LocalPlayer.Character:FindFirstChildWichIsA("Humanoid").Health == game.Players.LocalPlayer.Character:FindFirstChildWichIsA("Humanoid").MaxHealth/2 then
             bar.BackgroundColor3 = Color3.new(1,1,0)
         end
-        if game.Players.LocalPlayer.Character.Humanoid.Health < game.Players.LocalPlayer.Character.Humanoid.MaxHealth/2 then
-            bar.BackgroundColor3 = Color3.new(1,(game.Players.LocalPlayer.Character.Humanoid.Health/game.Players.LocalPlayer.Character.Humanoid.MaxHealth)*2,0)
+        if game.Players.LocalPlayer.Character:FindFirstChildWichIsA("Humanoid").Health < game.Players.LocalPlayer.Character:FindFirstChildWichIsA("Humanoid").MaxHealth/2 then
+            bar.BackgroundColor3 = Color3.new(1,(game.Players.LocalPlayer.Character:FindFirstChildWichIsA("Humanoid").Health/game.Players.LocalPlayer.Character:FindFirstChildWichIsA("Humanoid").MaxHealth)*2,0)
         end 
 	end)
 end)
