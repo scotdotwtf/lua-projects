@@ -23,9 +23,9 @@ local GuiService = game:GetService("GuiService")
 local VRService = game:GetService("VRService")
 local isTenFootInterface = GuiService:IsTenFootInterface()
 
-local ClientMemoryAnalyzerClass = require(CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Stats"):WaitForChild("ClientMemoryAnalyzer"))
-local ServerMemoryAnalyzerClass = require(CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Stats"):WaitForChild("ServerMemoryAnalyzer"))
-local StatsUtils = require(CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Stats"):WaitForChild("StatsUtils"))
+--local ClientMemoryAnalyzerClass = require(CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Stats"):WaitForChild("ClientMemoryAnalyzer"))
+--local ServerMemoryAnalyzerClass = require(CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Stats"):WaitForChild("ServerMemoryAnalyzer"))
+--local StatsUtils = require(CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Stats"):WaitForChild("StatsUtils"))
 
 local Style; do
 	local c3 = Color3.fromRGB;
