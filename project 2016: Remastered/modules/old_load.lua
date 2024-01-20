@@ -5,8 +5,8 @@ if not game:IsLoaded() then
     
         local getasset = getsynasset or getcustomasset
         makefolder("loadingimages")
-        writefile("loadingimages/bg.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/darkLoadingTexture.png"))
-        writefile("loadingimages/bluespin.png", game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/images/loadingCircle.png"))
+        writefile("loadingimages/bg.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/darkLoadingTexture.png"))
+        writefile("loadingimages/bluespin.png", game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/images/loadingCircle.png"))
 
     ]]
 

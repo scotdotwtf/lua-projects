@@ -13,4 +13,4 @@ getgenv().mods = {
     c00l_mode = false
 }
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/specowos/lua-projects/main/project%202016%3A%20Remastered/Main.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scotdotwtf/lua-projects/main/project%202016%3A%20Remastered/Main.lua"))()
